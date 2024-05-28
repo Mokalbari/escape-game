@@ -15,32 +15,39 @@ const gameItem = {
   enigme: "poulet",
   code: 2337,
   alarm: true,
-  glace: true,
+  glass: true,
 };
 
+// TO DO: Afficher le contenu de l'inventaire sur une DIV
+// TO DO: Créer un menu hamburger pour le jeu.
+
 // Fonctions utilitaires
+// TO DO : Il faut éditer la fonction sendDialog() pour que le dialogue puisse s'afficher dans une <div> dans le DOM.
 const f = {
   sendDialog: (str) => alert(str),
-  checkIfUserHasWinningObject: (user, answer) => user === answer,
+  checkMatchingCombination: (user, answer) => user === answer,
   askUserChoice: (value) => prompt(value),
   toLowerCase: (str) => str.toLowerCase(),
 };
 
+// TO DO : Il faut connecter toutes ces fonctions à des zones cliquables sur l'image.
 // Hall d'entrée
 const enigme = () => {
   if (user.key) {
     f.sendDialog(
-      `J'ai déjà répondu à l'énigme ! L'animal favori d'Abdou est le ${user.enigme}.`
+      `J'ai déjà répondu à l'énigme ! L'animal favori d'Abdou est le ${user.enigme}. Je peux me diriger vers la porte.`
     );
   } else {
-    f.sendDialog("Quel est l'animal préféré d'Abdou ?");
+    f.sendDialog(
+      "Pour pouvoir accéder à la salle des costumes, vous devez répondre à une question énigme ; Quel est l'animal favori d'Abdou ?"
+    );
     user.enigme = f.toLowerCase(f.askUserChoice("Quel est votre choix ?"));
 
-    if (f.checkIfUserHasWinningObject(user.enigme, gameItem.enigme)) {
+    if (f.checkMatchingCombination(user.enigme, gameItem.enigme)) {
       f.sendDialog(
         "Oui ! C'est un excellent choix ! Voici la clé pour ouvrir la porte du musée."
       );
-      !user.key;
+      user.key = true;
     } else {
       f.sendDialog("Non... Indice : son bruit rime avec code code code !");
     }
@@ -56,15 +63,17 @@ const doorToCostumeRoom = () => {
 };
 
 // Salle des costumes
+// TO DO : Il faut connecter toutes ces fonctions à des zones cliquables sur la salle 2
+// TO DO : Il faut éditer cette fonction pour changer l'image de la salle de hall à la salle des costumes.
 const costumeRoom = () => {};
 
 const card = (value) => {
   if (user.card) {
     f.sendDialog(`J'ai déjà pris cette carte. Le code est ${user.code}`);
   } else {
-    f.sendDialog("Ah ! Une carte ! Je vais noter le code.");
+    f.sendDialog("Ah ! Une carte ! Je vais noter le code dans mon inventaire.");
     user.code = value;
-    !user.card;
+    user.card = true;
   }
 };
 
@@ -76,7 +85,7 @@ const alarm = () => {
       "Une alarme. Si j'ai le bon code je peux peut-être la désactiver."
     );
     user.codeChoice = f.askUserChoice("Entrez le code de l'alarme");
-    if (f.checkIfUserHasWinningObject(+user.codeChoice, gameItem.code)) {
+    if (f.checkMatchingCombination(+user.codeChoice, gameItem.code)) {
       f.sendDialog("L'alarme a été désactivée.");
       gameItem.alarm = false;
     } else {
@@ -100,9 +109,11 @@ const hammer = () => {
 
 const glass = () => {
   if (user.hammer && !gameItem.alarm) {
-    f.sendDialog("Parfait ! J'ai désactivé l'alarme. Prenons ce costume !");
+    f.sendDialog(
+      "Parfait ! J'ai désactivé l'alarme. Cassons cette vitre et prenons ce costume !"
+    );
   } else if (!user.hammer && gameItem.alarm) {
-    f.sendDialog("Le costume ! Il est magnifique. Comment je peux y accéder ?");
+    f.sendDialog("Le costume ! Il est magnifique. Comment puis-je y accéder ?");
   } else if (user.hammer && gameItem.alarm) {
     f.sendDialog(
       "J'ai un marteau mais le système d'alarme est toujours activé. Si je casse la vitre je risque d'attirer l'attention."
@@ -113,3 +124,13 @@ const glass = () => {
     );
   }
 };
+
+// DEMONSTRATION DES FONCTIONNALITES
+
+// doorToCostumeRoom();
+// enigme();
+// card();
+// hammer();
+// glass();
+// alarm();
+// glass();
