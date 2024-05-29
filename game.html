@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image avec Zones Cliquables et Couleur</title>
+    <style>
+        .image-container {
+            position: relative;
+            display: inline-block;
+        }
+        .clickable-zone {
+            position: absolute;
+            background-color: rgba(255, 0, 0, 0.5); /* Couleur semi-transparente */
+            cursor: pointer;
+        }
+        #cliquablezone1 {
+            left: 34px; 
+            top: 44px; 
+            width: 236px; 
+            height: 306px;
+        }
+        
+        #cliquablezone2 {
+            left: 400px; 
+            top: 100px; 
+            width: 100px; 
+            height: 100px; 
+            border-radius: 50%;
+        }
+        #cliquablezone3 {
+            left: 420px; 
+            top: 60px; 
+            width: 180px; 
+            height: 90px; 
+            clip-path: polygon(0% 0%, 100% 0%, 80% 100%, 0% 80%);
+        }
+
+        .clickable-zone:hover {
+            background-color: rgba(255, 0, 0, 0.7); /* Changement de couleur au survol */
+        }
+    </style>
+</head>
+<body>
+    <div class="image-container">
+        <img src="votre_image.jpeg" alt="Image avec zones cliquables" id="main-image">
+        <div id="cliquablezone1" class="clickable-zone" onclick="zoneCliquee('Zone 1')"></div>
+        <div id="cliquablezone2" class="clickable-zone" onclick="zoneCliquee('Zone 2')"></div>
+        <div id="cliquablezone3" class="clickable-zone" onclick="zoneCliquee('Zone 3')"></div>
+        <div id="dialogue">
+            <p id="textdialogue">Bienvenue</p>
+        </div>
+    </div>
+
+    <script>
+        function zoneCliquee(zone) {
+            alert(zone + ' a été cliquée !');
+        }
+    </script>
+</body>
+</html>
