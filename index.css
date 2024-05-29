@@ -1,0 +1,13 @@
+#footer {
+    display: flex;
+    flex-direction: column;
+}
+.globalTopFooter{
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
+}
+.botFooter{
+    display: flex;
+    justify-content: center;
+}
