@@ -59,22 +59,7 @@ const modalUser = () =>
   }
 }
     modalUser();
-// let UserPseudo = "";
-// const modalUser = {
-//   modal : document.getElementById("userModal"),
-//   btn :   document.getElementById("openModalBtn"),
-//   span :  document.getElementById("close")[0],
-//   saveBtn : document.getElementById("savePseudoBtn"),
-//   input : document.getElementById("userPseudoInput"),
-// };
-//  const userClick = () => {
-//           btn.onclick = modal.style.display = "block",
-//           span.onclick = modal.style.display = "none"        
-//  };
-//       saveBtn.onclick = () => {
-//           pseudo = input.value;
-//           modal.style.display = "none"
-//  };
+
 
 
 /* l'objet gameItem doit faire évoluer ses conditions lorsque l'user peut intéragir 
