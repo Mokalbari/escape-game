@@ -1,0 +1,34 @@
+@import url(variables.css);
+
+body {
+  display: grid;
+  place-items: center;
+  background-color: var(--clr-neutral-800);
+}
+
+.image__container {
+  position: relative;
+  width: min(95% 1080px); /* This keeps the same width as the image */
+}
+
+#playing-image {
+  width: 100%; /* Full width within its container */
+  border-radius: 1rem;
+}
+
+#dialogueBox {
+  position: absolute;
+  bottom: 5%;
+  left: 10%;
+  width: 80%;
+  min-height: 20%;
+  background-color: var(--clr-neutral-05);
+  text-align: center;
+  padding: 1rem;
+  border-radius: 1rem;
+  box-shadow: 17px 19px 15px -3px rgba(0, 0, 0, 0.8);
+}
+
+.hidden {
+  opacity: 0;
+}

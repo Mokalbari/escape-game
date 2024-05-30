@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hero'Scape</title>
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="game.css" />
+    <script src="game.js" defer></script>
+  </head>
+  <body>
+    <section class="image__container">
+      <img
+        src="./img/lobby.png"
+        alt="Lobby d'un musée avec une personne attendant derrière un comptoir."
+        id="playing-image"
+        usemap="#lobby-map"
+      />
+      <map name="lobby-map" id="mapContainer">
+        <area
+          target=""
+          alt="Parler au concierge"
+          title="Parler au concierge"
+          href="#"
+          coords="323,269,697,617"
+          shape="rect"
+          id="enigme"
+        />
+        <area
+          target=""
+          alt="Aller à la salle des costumes"
+          title="Aller à la salle des costumes"
+          href="#"
+          coords="1349,312,1669,666"
+          shape="rect"
+          id="doorToCostumeRoom"
+        />
+        <area
+          target=""
+          alt="Aller aux toilettes"
+          title="Aller aux toilettes"
+          href="#"
+          coords="1053,350,1045,722,1249,647,1243,404,1162,385"
+          shape="poly"
+          id="doorToToilets"
+        />
+      </map>
+      <!-- <div id="enigme" class="clickable-zone"></div>
+      <div class="clickable-zone"></div> -->
+      <div id="dialogueBox" class="hidden"></div>
+    </section>
+  </body>
+</html>
