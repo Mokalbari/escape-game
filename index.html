@@ -51,9 +51,21 @@
       </section>
     </main>
     
-    <section class="dialogBox">
-
+    <section class="dialogBox">  
     </section>
+
+    <button id="openModalBtn">Ouvrir la modal</button>
+    <!-- La modal -->
+    <form id="userModal" class="modal">
+        <fieldset>
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2 id="h2Modal">choisissez votre pseudo</h2>
+                <input type="text" id="userPseudoInput" placeholder="Votre pseudo">
+                <button type="submit" id="savePseudoBtn">Envoyer</button>
+            </div>
+        </fieldset>
+    </form>
     <footer></footer>
   </body>
 </html>
