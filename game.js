@@ -3,7 +3,7 @@
 const user = {
   name: "Michel",
   enigme: "",
-  key: false,
+  key: true,
   code: "",
   codeChoice: "",
   card: false,
@@ -32,8 +32,8 @@ const DOMReference = {
 const f = {
   sendDialog: (name, str) => {
     DOMReference.dialogueContainer.classList.toggle("hidden");
-    DOMReference.dialogueName.innerHTML = name;
-    DOMReference.dialogueContent.innerHTML = str;
+    DOMReference.dialogueName.textContent = name;
+    DOMReference.dialogueContent.textContent = str;
   },
   checkMatchingCombination: (user, answer) => user === answer,
   askUserChoice: (value) => prompt(value),
@@ -59,20 +59,28 @@ const realGameItem = {
 
       if (f.checkMatchingCombination(user.enigme, gameItem.enigme)) {
         f.sendDialog(
+          "Concierge",
           "Oui ! C'est un excellent choix ! Voici la clé pour ouvrir la porte du musée."
         );
         user.key = true;
       } else {
-        f.sendDialog("Non... Indice : son bruit rime avec code code code !");
+        f.sendDialog(
+          "Concierge",
+          "Non... Indice : son bruit rime avec code code code !"
+        );
       }
     }
   },
 
   card: (value) => {
     if (user.card) {
-      f.sendDialog(`J'ai déjà pris cette carte. Le code est ${user.code}`);
+      f.sendDialog(
+        user.name,
+        `J'ai déjà pris cette carte. Le code est ${user.code}`
+      );
     } else {
       f.sendDialog(
+        user.name,
         "Ah ! Une carte ! Je vais noter le code dans mon inventaire."
       );
       user.code = value;
@@ -82,34 +90,54 @@ const realGameItem = {
 
   alarm: () => {
     if (!gameItem.alarm) {
-      sendDialog("J'ai déjà désactiver l'alarme.");
+      sendDialog(
+        user.name,
+        "J'ai déjà désactiver l'alarme."
+      );
     } else {
       f.sendDialog(
+        user.name,
         "Une alarme. Si j'ai le bon code je peux peut-être la désactiver."
       );
       user.codeChoice = f.askUserChoice("Entrez le code de l'alarme");
       if (f.checkMatchingCombination(+user.codeChoice, gameItem.code)) {
-        f.sendDialog("L'alarme a été désactivée.");
+        f.sendDialog(
+          "Système de sécurité",
+          "L'alarme a été désactivée."
+        );
         gameItem.alarm = false;
       } else {
-        f.sendDialog("Mauvais code saisi.");
+        f.sendDialog(
+          "Système de sécurité",
+          "Mauvais code saisi."
+        );
       }
     }
   },
 
   alarm: () => {
     if (!gameItem.alarm) {
-      sendDialog("J'ai déjà désactiver l'alarme.");
+      sendDialog(
+        user.name,
+        "J'ai déjà désactiver l'alarme."
+      );
     } else {
       f.sendDialog(
+        user.name,
         "Une alarme. Si j'ai le bon code je peux peut-être la désactiver."
       );
       user.codeChoice = f.askUserChoice("Entrez le code de l'alarme");
       if (f.checkMatchingCombination(+user.codeChoice, gameItem.code)) {
-        f.sendDialog("L'alarme a été désactivée.");
+        f.sendDialog(
+          "Système de sécurité",
+          "L'alarme a été désactivée."
+        );
         gameItem.alarm = false;
       } else {
-        f.sendDialog("Mauvais code saisi.");
+        f.sendDialog(
+          "Système de sécurité",
+          "Mauvais code saisi."
+        );
       }
     }
   },
@@ -117,10 +145,12 @@ const realGameItem = {
   hammer: () => {
     if (user.hammer) {
       f.sendDialog(
+        user.name,
         "J'ai déjà ce marteau. Peut-être que je peux m'en servir d'une manière ou d'une autre..."
       );
     } else {
       f.sendDialog(
+        user.name,
         "Ah ! Un marteau ! Intéressant... Je peux peut-être m'en servir."
       );
       user.hammer = true;
@@ -130,18 +160,22 @@ const realGameItem = {
   glass: () => {
     if (user.hammer && !gameItem.alarm) {
       f.sendDialog(
+        user.name,
         "Parfait ! J'ai désactivé l'alarme. Cassons cette vitre et prenons ce costume !"
       );
     } else if (!user.hammer && gameItem.alarm) {
       f.sendDialog(
+        user.name,
         "Le costume ! Il est magnifique. Comment puis-je y accéder ?"
       );
     } else if (user.hammer && gameItem.alarm) {
       f.sendDialog(
+        user.name,
         "J'ai un marteau mais le système d'alarme est toujours activé. Si je casse la vitre je risque d'attirer l'attention."
       );
     } else if (!user.hammer && !gameItem.alarm) {
       f.sendDialog(
+        user.name,
         "J'ai désactivé l'alarme. Maintenant comment puis-je ouvrir cette porte ?"
       );
     }
