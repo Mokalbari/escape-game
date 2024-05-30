@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Superposition d'images</title>
+    <style>
+        .container {
+            position: relative;
+            width: 500px; /* La largeur du conteneur peut être ajustée selon vos besoins */
+            height: 500px; /* La hauteur du conteneur peut être ajustée selon vos besoins */
+        }
+        .image1, .image2 {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .image2 {
+            opacity: 0.2; /* Ajustez l'opacité de l'image superposée si nécessaire */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="img/logo.png" alt="Première image" class="image1">
+        <img src="img/logo 2.jpg" alt="Deuxième image" class="image2">
+    </div>
+</body>
+</html>
