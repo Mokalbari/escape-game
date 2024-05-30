@@ -23,8 +23,25 @@ const gameItem = {
 
 // Fonctions utilitaires
 // TO DO : Il faut éditer la fonction sendDialog() pour que le dialogue puisse s'afficher dans une <div> dans le DOM.
+// const dialogBox = document.querySelector('.dialogBox');
+// const createElem = document.createElement('p');
+// const contentText = createElem.innerHTML = " voici un texte";
+// const sendDialog = (str) => {     
+//       dialogBox.appendChild(createElem);
+// }
+dialogBox("str")
 const f = {
-  sendDialog: (str) => alert(str),
+  dialogBox :(str) =>  {
+              document.querySelector('.dialogBox'),
+              document.createElement('p').appendChild()
+              .document.innerHTML = " voici un texte"
+              
+            },
+  
+  
+
+    
+  // }, //alert(str),
   checkMatchingCombination: (user, answer) => user === answer,
   askUserChoice: (value) => prompt(value),
   toLowerCase: (str) => str.toLowerCase(),
