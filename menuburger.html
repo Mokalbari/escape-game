@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Parcel Sandbox</title>
+    <meta charset="UTF-8" />
+    <style>
+        body {
+            font-family: sans-serif;
+            display:flex;
+            justify-content :flex-end;
+        }
+
+        .dropdown-btn {
+            border-radius:3rem;
+            border:none;
+            cursor: pointer;
+            height :50px;
+            width:50px;
+            background-image:url("menu.png");
+            background-repeat:no-repeat;
+            background-size:80% auto;
+            background-position: center;
+        }
+        
+
+        .dropdown-menu-content {
+            display: none;
+            list-style: none;
+            background-color: #f7434c;
+            text-align: center;
+            width:120px;
+        }
+
+        .dropdown-menu-content li {
+            margin-bottom: 10px;
+            padding:0.2rem;
+        }
+
+        .dropdown-menu-content li:hover {
+            background-color:#fff;
+            cursor: pointer;
+        }
+
+        .dropdown-menu-content li:hover > a {
+            color:#f7434c;
+        }
+
+        .bloc__menu {
+            display:flex;
+            flex-direction:column;
+            justify-content: right;
+        }
+
+        .visible {
+            display: block;
+            margin-top:10px;
+        }
+
+        .lien__menu {
+            text-decoration:none;
+            color:#fff;
+        }
+        .image__menu {
+            background-image:url("croix.png");
+            background-size: cover;
+            background-position: center;
+        }
+
+        .clic-right {
+            text-align:right;
+        }
+
+    </style>
+  </head>
+
+  <body>
+    <div id="app"></div>
+    <ul class="bloc__menu">
+      <button class="dropdown-btn"></button>
+      <div class="dropdown-menu-content">
+        <li><a href="#" class="lien__menu">Accueil</a></li>
+        <li><a href="#" class="lien__menu">À propos</a></li>
+        <li><a href="#" class="lien__menu">Help</a></li>
+      </div>
+    </ul>
+    <script>
+        // We create a variable dropdownBtn set to the DOM button node
+        const dropdownBtn = document.querySelector(".dropdown-btn");
+        // We create a variable dropdownMenu set to the DOM element
+        const dropdownMenu = document.querySelector(".dropdown-menu-content");
+
+        // We listen for a click event
+        dropdownBtn.addEventListener("click", function () {
+            // On click we toggle the class visible on the dropdown
+            dropdownMenu.classList.toggle("visible");
+        });
+
+        const imageMenu = document.querySelector(".dropdown-btn");
+        dropdownBtn.addEventListener("click", function () {
+            // On click we toggle the class visible on the dropdown
+            imageMenu.classList.toggle("image__menu");
+        });
+
+        dropdownBtn.addEventListener("click", function () {
+            // On click we toggle the class visible on the dropdown
+            imageMenu.classList.add("clic-right");
+        });
+
+
+
+    </script>
+  </body>
+</html>
