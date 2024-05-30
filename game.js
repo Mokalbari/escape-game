@@ -1,8 +1,9 @@
 // Config globale
 // L'objet user doit évoluer ses conditions lorsqu'il peut posséder un objet.
 const user = {
+  name: "Michel",
   enigme: "",
-  key: true,
+  key: false,
   code: "",
   codeChoice: "",
   card: false,
@@ -21,11 +22,19 @@ const DOMReference = {
   body: document.querySelector("body"),
   image: document.querySelector("#playing-image"),
   usemap: document.querySelector("#mapContainer"),
+  dialogueContainer: document.querySelector("#dialogue__container"),
+  dialogueName: document.querySelector("#dialogue__name"),
+  dialogueContent: document.querySelector("#dialogue__content"),
+  closeButton: document.querySelector("#closeButton"),
 };
 
 // Fonctions utilitaires
 const f = {
-  sendDialog: (str) => alert(str),
+  sendDialog: (name, str) => {
+    DOMReference.dialogueContainer.classList.toggle("hidden");
+    DOMReference.dialogueName.innerHTML = name;
+    DOMReference.dialogueContent.innerHTML = str;
+  },
   checkMatchingCombination: (user, answer) => user === answer,
   askUserChoice: (value) => prompt(value),
   toLowerCase: (str) => str.toLowerCase(),
@@ -158,6 +167,7 @@ const changeRoom = {
     user.key
       ? rooms.costumeRoom()
       : f.sendDialog(
+          user.name,
           "Il me manque la clé. Peut-être je pourrais aller parler au concierge ?"
         );
   },
@@ -181,5 +191,7 @@ DOMReference.body.addEventListener("click", (event) => {
     case "alarm":
       realGameItem.alarm();
       break;
+    case "closeButton":
+      DOMReference.dialogueContainer.classList.toggle("hidden");
   }
 });
