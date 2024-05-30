@@ -3,7 +3,7 @@
 const user = {
   name: "Michel",
   enigme: "",
-  key: true,
+  key: false,
   code: "",
   codeChoice: "",
   card: false,
@@ -33,7 +33,7 @@ const f = {
   sendDialog: (name, str) => {
     DOMReference.dialogueContainer.classList.toggle("hidden");
     DOMReference.dialogueName.textContent = name;
-    DOMReference.dialogueContent.textContent = str;
+    DOMReference.dialogueContent.innerHTML = str;
   },
   checkMatchingCombination: (user, answer) => user === answer,
   askUserChoice: (value) => prompt(value),
@@ -50,25 +50,20 @@ const realGameItem = {
         user.name,
         `J'ai déjà répondu à l'énigme ! L'animal favori d'Abdou est le ${user.enigme}. Je peux me diriger vers la porte.`
       );
+    } else if (user.enigme.toLowerCase() === "poulet") {
+      user.key = true;
+      f.sendDialog(
+        "Concierge",
+        "C'est bien ça... Le poulet. :| Voici la clé de la salle des costumes. Ne touchez rien s'il vous plait."
+      );
     } else {
       f.sendDialog(
         "Concierge",
-        "Pour pouvoir accéder à la salle des costumes, vous devez répondre à une question énigme ; Quel est l'animal favori d'Abdou ?"
+        `Pour pouvoir accéder à la salle des costumes, vous devez répondre à une question ; <br />Quel est l'animal favori d'Abdou ?
+        <input id="animal-question" type="text">
+        <button id="submit-answer">Envoyer</button>
+        `
       );
-      user.enigme = f.toLowerCase(f.askUserChoice("Quel est votre choix ?"));
-
-      if (f.checkMatchingCombination(user.enigme, gameItem.enigme)) {
-        f.sendDialog(
-          "Concierge",
-          "Oui ! C'est un excellent choix ! Voici la clé pour ouvrir la porte du musée."
-        );
-        user.key = true;
-      } else {
-        f.sendDialog(
-          "Concierge",
-          "Non... Indice : son bruit rime avec code code code !"
-        );
-      }
     }
   },
 
@@ -90,10 +85,7 @@ const realGameItem = {
 
   alarm: () => {
     if (!gameItem.alarm) {
-      sendDialog(
-        user.name,
-        "J'ai déjà désactiver l'alarme."
-      );
+      sendDialog(user.name, "J'ai déjà désactiver l'alarme.");
     } else {
       f.sendDialog(
         user.name,
@@ -101,43 +93,10 @@ const realGameItem = {
       );
       user.codeChoice = f.askUserChoice("Entrez le code de l'alarme");
       if (f.checkMatchingCombination(+user.codeChoice, gameItem.code)) {
-        f.sendDialog(
-          "Système de sécurité",
-          "L'alarme a été désactivée."
-        );
+        f.sendDialog("Système de sécurité", "L'alarme a été désactivée.");
         gameItem.alarm = false;
       } else {
-        f.sendDialog(
-          "Système de sécurité",
-          "Mauvais code saisi."
-        );
-      }
-    }
-  },
-
-  alarm: () => {
-    if (!gameItem.alarm) {
-      sendDialog(
-        user.name,
-        "J'ai déjà désactiver l'alarme."
-      );
-    } else {
-      f.sendDialog(
-        user.name,
-        "Une alarme. Si j'ai le bon code je peux peut-être la désactiver."
-      );
-      user.codeChoice = f.askUserChoice("Entrez le code de l'alarme");
-      if (f.checkMatchingCombination(+user.codeChoice, gameItem.code)) {
-        f.sendDialog(
-          "Système de sécurité",
-          "L'alarme a été désactivée."
-        );
-        gameItem.alarm = false;
-      } else {
-        f.sendDialog(
-          "Système de sécurité",
-          "Mauvais code saisi."
-        );
+        f.sendDialog("Système de sécurité", "Mauvais code saisi.");
       }
     }
   },
@@ -230,4 +189,18 @@ DOMReference.body.addEventListener("click", (event) => {
     case "closeButton":
       DOMReference.dialogueContainer.classList.toggle("hidden");
   }
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const parentElement = document.body; // Adjust this to the correct parent element
+
+  parentElement.addEventListener("click", (event) => {
+    if (event.target && event.target.id === "submit-answer") {
+      const inputElement = document.getElementById("animal-question");
+      if (inputElement) {
+        user.enigme = inputElement.value;
+        DOMReference.dialogueContainer.classList.toggle("hidden"); // Add further processing of the user input here
+      }
+    }
+  });
 });
