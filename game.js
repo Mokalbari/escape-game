@@ -47,10 +47,12 @@ const realGameItem = {
   enigme: () => {
     if (user.key) {
       f.sendDialog(
+        user.name,
         `J'ai déjà répondu à l'énigme ! L'animal favori d'Abdou est le ${user.enigme}. Je peux me diriger vers la porte.`
       );
     } else {
       f.sendDialog(
+        "Concierge",
         "Pour pouvoir accéder à la salle des costumes, vous devez répondre à une question énigme ; Quel est l'animal favori d'Abdou ?"
       );
       user.enigme = f.toLowerCase(f.askUserChoice("Quel est votre choix ?"));
