@@ -1,0 +1,58 @@
+@import url("variables.css");
+.footer {
+  display: flex;
+  background-color: var(--clr-accent-2);
+  justify-content: center;
+  background-size: cover;
+  flex-direction: column;
+
+  .footer__container {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
+    margin-right: 50px;
+    margin-left: 50px;
+    font-family: var(--font-family-header2);
+  }
+
+  .footer__mention {
+    display: flex;
+    justify-content: center;
+    font-family: var(--font-family-header1);
+    background-color: white;
+    color: var(--clr-accent-3);
+  }
+  .footer__link {
+    display: flex;
+  }
+  .footer__link > a {
+    color: var(--clr-accent-1);
+    text-decoration: none;
+  }
+}
+.legalMention {
+  color: var(--clr-accent-3);
+  text-decoration: none;
+}
+.btn {
+  color: var(--clr-accent-1);
+  text-decoration: none;
+}
+.twitter {
+  img {
+    width: 15px;
+    margin-right: 10px;
+  }
+}
+.instagram {
+  img {
+    width: 17px;
+    margin-right: 10px;
+  }
+}
+.youtube {
+  img {
+    width: 23px;
+    margin-right: 10px;
+  }
+}
