@@ -1,0 +1,112 @@
+@import url(variables.css);
+
+body {
+  display: grid;
+  place-items: center;
+  background-color: var(--clr-neutral-800);
+}
+
+.image__container {
+  position: relative;
+  width: min(1080px 100%); /* This keeps the same width as the image */
+}
+
+#playing-image {
+  width: 100%; /* Full width within its container */
+  border-radius: 1rem;
+}
+
+#dialogue__container {
+  position: absolute;
+  bottom: 5%;
+  left: 10%;
+  width: 80%;
+  min-height: 20%;
+  background-color: var(--clr-neutral-05);
+  text-align: center;
+  padding-block: 2rem;
+  padding-inline: 2rem;
+  border-radius: 1rem;
+  box-shadow: 17px 19px 15px -3px rgba(0, 0, 0, 0.8);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 1.5rem;
+
+  #dialogue__name {
+    font-size: 2rem;
+    font-weight: 600;
+  }
+
+  i {
+    align-self: flex-end;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+.hidden {
+  opacity: 0;
+  display: none;
+}
+
+/** START Menu Burger **/
+
+.game__menu {
+  top: 0;
+  right: 0;
+  position: absolute;
+
+  li {
+    text-decoration: none;
+    color: #000;
+    font-family: var(--font-family-body);
+  }
+}
+
+.dropdown-btn {
+  border-radius: 3rem;
+  cursor: pointer;
+  height: 50px;
+  width: 50px;
+}
+
+.dropdown-menu-content {
+  padding: 2rem;
+  visibility: hidden;
+  background-color: var(--clr-neutral-05);
+  text-align: center;
+  min-width: 8rem;
+
+  li {
+    margin-bottom: 10px;
+    padding: 0.2rem;
+
+    &:hover {
+      background-color: var(--clr-accent-1);
+      cursor: pointer;
+      color: var(--clr-neutral-05);
+    }
+
+    a {
+      text-decoration: none;
+    }
+  }
+
+  transition:
+    transform 250ms ease-in-out,
+    opacity 250ms ease-in-out;
+}
+
+.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-1svw);
+  transition:
+    transform 250ms ease-in-out,
+    opacity 250ms ease-in-out;
+}
+
+/** END Menu Burger **/
