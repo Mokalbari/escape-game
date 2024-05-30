@@ -8,7 +8,7 @@ body {
 
 .image__container {
   position: relative;
-  width: min(95% 1080px); /* This keeps the same width as the image */
+  width: min(1080px 100%); /* This keeps the same width as the image */
 }
 
 #playing-image {
@@ -51,3 +51,62 @@ body {
   opacity: 0;
   display: none;
 }
+
+/** START Menu Burger **/
+
+.game__menu {
+  top: 0;
+  right: 0;
+  position: absolute;
+
+  li {
+    text-decoration: none;
+    color: #000;
+    font-family: var(--font-family-body);
+  }
+}
+
+.dropdown-btn {
+  border-radius: 3rem;
+  cursor: pointer;
+  height: 50px;
+  width: 50px;
+}
+
+.dropdown-menu-content {
+  padding: 2rem;
+  visibility: hidden;
+  background-color: var(--clr-neutral-05);
+  text-align: center;
+  min-width: 8rem;
+
+  li {
+    margin-bottom: 10px;
+    padding: 0.2rem;
+
+    &:hover {
+      background-color: var(--clr-accent-1);
+      cursor: pointer;
+      color: var(--clr-neutral-05);
+    }
+
+    a {
+      text-decoration: none;
+    }
+  }
+
+  transition:
+    transform 250ms ease-in-out,
+    opacity 250ms ease-in-out;
+}
+
+.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-1svw);
+  transition:
+    transform 250ms ease-in-out,
+    opacity 250ms ease-in-out;
+}
+
+/** END Menu Burger **/

@@ -26,6 +26,8 @@ const DOMReference = {
   dialogueName: document.querySelector("#dialogue__name"),
   dialogueContent: document.querySelector("#dialogue__content"),
   closeButton: document.querySelector("#closeButton"),
+  dropdownBtn: document.querySelector(".dropdown-btn"),
+  dropdownMenu: document.querySelector(".dropdown-menu-content"),
 };
 
 // Fonctions utilitaires
@@ -54,16 +56,22 @@ const realGameItem = {
       user.key = true;
       f.sendDialog(
         "Concierge",
-        "C'est bien ça... Le poulet. :| Voici la clé de la salle des costumes. Ne touchez rien s'il vous plait."
+        `C'est bien ça... La réponse est "${gameItem.enigme}". Voici la clé de la salle des costumes. Ne touchez rien s'il vous plait.`
       );
     } else {
-      f.sendDialog(
-        "Concierge",
-        `Pour pouvoir accéder à la salle des costumes, vous devez répondre à une question ; <br />Quel est l'animal favori d'Abdou ?
+      !user.enigme
+        ? f.sendDialog(
+            "Concierge",
+            `Pour pouvoir accéder à la salle des costumes, vous devez répondre à une question ; <br />Quel est l'animal favori d'Abdou ?
         <input id="animal-question" type="text">
         <button id="submit-answer">Envoyer</button>
         `
-      );
+          )
+        : f.sendDialog(
+            "Concierge",
+            `Non. La réponse n'est pas ${user.enigme}. Vous pouver réessayer.`
+          );
+      user.enigme = "";
     }
   },
 
@@ -203,4 +211,11 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
   });
+});
+
+// START Menu Burger
+DOMReference.dropdownBtn.addEventListener("click", () => {
+  DOMReference.dropdownMenu.classList.toggle("visible");
+  DOMReference.dropdownBtn.classList.toggle("bx-x");
+  DOMReference.dropdownBtn.classList.toggle("bx-menu");
 });
