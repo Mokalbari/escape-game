@@ -1,7 +1,7 @@
 @import url("variables.css");
 .header {
   position: relative;
-  height: 500px;
+  height: 40vh;
 
   .header__logo {
     object-fit: contain;
