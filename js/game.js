@@ -153,7 +153,7 @@ const falseGameItem = {};
 
 const rooms = {
   costumeRoom: () => {
-    DOMReference.image.src = "./img/costume-room.webp";
+    DOMReference.image.src = "../img/costume-room.webp";
     DOMReference.usemap.innerHTML = `
     <map name="image-map">
       <area target="" alt="Tenter d'ouvrir le présentoir à costume." title="Tenter d'ouvrir le présentoir à costume." href="#" id="glass" coords="533,141,1198,673" shape="rect">
