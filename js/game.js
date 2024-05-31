@@ -200,7 +200,7 @@ const rooms = {
 const changeRoom = {
   doorToCostumeRoom(user) {
     if (user.key) {
-      Rooms.costumeRoom();
+      rooms.costumeRoom();
     } else {
       gameUtilities.sendDialog(
         user.name,
@@ -218,7 +218,7 @@ DOMReference.body.addEventListener("click", (event) => {
       gameActions.enigme(user, gameItem);
       break;
     case "doorToCostumeRoom":
-      ChangeRoom.doorToCostumeRoom(user);
+      changeRoom.doorToCostumeRoom(user);
       break;
     case "hammer":
       gameActions.hammer(user);
