@@ -57,51 +57,45 @@ const DOMReference = (() => {
 })();
 
 // Module pour les fonctions utilitaires
-const GameUtilities = (() => {
+const gameUtilities = (() => {
   const sendDialog = (name, str) => {
     DOMReference.dialogueContainer.classList.toggle("hidden");
-    DOMReference.dialogueName.textContent = name;
+    DOMReference.dialogueName.innerHTML = name;
     DOMReference.dialogueContent.innerHTML = str;
   };
-
-  const checkMatchingCombination = (user, answer) => user === answer;
-
-  const askUserChoice = (value) => prompt(value);
 
   const toLowerCase = (str) => str.toLowerCase();
 
   return {
     sendDialog,
-    checkMatchingCombination,
-    askUserChoice,
     toLowerCase,
   };
 })();
 
 // Création d'objets pour encapsuler la logique du jeu
-const GameActions = {
+const gameActions = {
   enigme(user, gameItem) {
     if (user.key) {
-      GameUtilities.sendDialog(
+      gameUtilities.sendDialog(
         user.name,
         `J'ai déjà répondu à l'énigme ! L'animal favori d'Abdou est le ${user.enigme}. Je peux me diriger vers la porte.`
       );
-    } else if (GameUtilities.toLowerCase(user.enigme) === "poulet") {
+    } else if (gameUtilities.toLowerCase(user.enigme) === "poulet") {
       user.key = true;
-      GameUtilities.sendDialog(
+      gameUtilities.sendDialog(
         "Concierge",
         `C'est bien ça... La réponse est "${gameItem.enigme}". Voici la clé de la salle des costumes. Ne touchez rien s'il vous plait.`
       );
     } else {
       if (!user.enigme) {
-        GameUtilities.sendDialog(
+        gameUtilities.sendDialog(
           "Concierge",
           `Pour pouvoir accéder à la salle des costumes, vous devez répondre à une question ; <br />Quel est l'animal favori d'Abdou ?
           <input id="animal-question" type="text">
-          <button id="submit-answer">Envoyer</button>`
+          <button id="submit-enigme">Envoyer</button>`
         );
       } else {
-        GameUtilities.sendDialog(
+        gameUtilities.sendDialog(
           "Concierge",
           `Non. La réponse n'est pas ${user.enigme}. Vous pouver réessayer.`
         );
@@ -112,12 +106,12 @@ const GameActions = {
 
   card(user, value) {
     if (user.card) {
-      GameUtilities.sendDialog(
+      gameUtilities.sendDialog(
         user.name,
         `J'ai déjà pris cette carte. Le code est ${user.code}`
       );
     } else {
-      GameUtilities.sendDialog(
+      gameUtilities.sendDialog(
         user.name,
         "Ah ! Une carte ! Je vais noter le code dans mon inventaire."
       );
@@ -128,34 +122,35 @@ const GameActions = {
 
   alarm(user, gameItem) {
     if (!gameItem.alarm) {
-      GameUtilities.sendDialog(user.name, "J'ai déjà désactivé l'alarme.");
-    } else {
-      GameUtilities.sendDialog(
+      gameUtilities.sendDialog("Système de sécurité", "Alarme désactivée");
+      return;
+    }
+    if (gameItem.alarm && !user.codeChoice) {
+      gameUtilities.sendDialog(
         user.name,
-        "Une alarme. Si j'ai le bon code je peux peut-être la désactiver."
+        `L'alarme est connectée à la vitrine. Si j'ouvre la vitrine sans la désactiver je risque d'attirer l'attention.
+    <input id="alarm-question" type="text">
+    <button id="submit-alarm">Tester le code</button>`
       );
-      user.codeChoice = GameUtilities.askUserChoice(
-        "Entrez le code de l'alarme"
+    } else if (gameItem.alarm && user.codeChoice) {
+      gameUtilities.sendDialog(
+        "Système de sécurité",
+        `Mauvais code saisi.     
+      <input id="alarm-question" type="text">
+      <button id="submit-alarm">Tester le code</button>`
       );
-      if (gameItem.deactivateAlarm(+user.codeChoice)) {
-        GameUtilities.sendDialog(
-          "Système de sécurité",
-          "L'alarme a été désactivée."
-        );
-      } else {
-        GameUtilities.sendDialog("Système de sécurité", "Mauvais code saisi.");
-      }
+      user.codeChoice = "";
     }
   },
 
   hammer(user) {
     if (user.hammer) {
-      GameUtilities.sendDialog(
+      gameUtilities.sendDialog(
         user.name,
         "J'ai déjà ce marteau. Peut-être que je peux m'en servir d'une manière ou d'une autre..."
       );
     } else {
-      GameUtilities.sendDialog(
+      gameUtilities.sendDialog(
         user.name,
         "Ah ! Un marteau ! Intéressant... Je peux peut-être m'en servir."
       );
@@ -165,22 +160,22 @@ const GameActions = {
 
   glass(user, gameItem) {
     if (user.hammer && !gameItem.alarm) {
-      GameUtilities.sendDialog(
+      gameUtilities.sendDialog(
         user.name,
         "Parfait ! J'ai désactivé l'alarme. Cassons cette vitre et prenons ce costume !"
       );
     } else if (!user.hammer && gameItem.alarm) {
-      GameUtilities.sendDialog(
+      gameUtilities.sendDialog(
         user.name,
         "Le costume ! Il est magnifique. Comment puis-je y accéder ?"
       );
     } else if (user.hammer && gameItem.alarm) {
-      GameUtilities.sendDialog(
+      gameUtilities.sendDialog(
         user.name,
         "J'ai un marteau mais le système d'alarme est toujours activé. Si je casse la vitre je risque d'attirer l'attention."
       );
     } else if (!user.hammer && !gameItem.alarm) {
-      GameUtilities.sendDialog(
+      gameUtilities.sendDialog(
         user.name,
         "J'ai désactivé l'alarme. Maintenant comment puis-je ouvrir cette porte ?"
       );
@@ -188,7 +183,7 @@ const GameActions = {
   },
 };
 
-const Rooms = {
+const rooms = {
   costumeRoom() {
     DOMReference.image.src = "../img/costume-room.webp";
     DOMReference.usemap.innerHTML = `
@@ -202,12 +197,12 @@ const Rooms = {
   },
 };
 
-const ChangeRoom = {
+const changeRoom = {
   doorToCostumeRoom(user) {
     if (user.key) {
       Rooms.costumeRoom();
     } else {
-      GameUtilities.sendDialog(
+      gameUtilities.sendDialog(
         user.name,
         "Il me manque la clé. Peut-être je pourrais aller parler au concierge ?"
       );
@@ -220,19 +215,19 @@ DOMReference.body.addEventListener("click", (event) => {
   const target = event.target.id;
   switch (target) {
     case "enigme":
-      GameActions.enigme(user, gameItem);
+      gameActions.enigme(user, gameItem);
       break;
     case "doorToCostumeRoom":
       ChangeRoom.doorToCostumeRoom(user);
       break;
     case "hammer":
-      GameActions.hammer(user);
+      gameActions.hammer(user);
       break;
     case "glass":
-      GameActions.glass(user, gameItem);
+      gameActions.glass(user, gameItem);
       break;
     case "alarm":
-      GameActions.alarm(user, gameItem);
+      gameActions.alarm(user, gameItem);
       break;
     case "closeButton":
       DOMReference.dialogueContainer.classList.toggle("hidden");
@@ -244,10 +239,19 @@ document.addEventListener("DOMContentLoaded", () => {
   const parentElement = document.body;
 
   parentElement.addEventListener("click", (event) => {
-    if (event.target && event.target.id === "submit-answer") {
+    if (event.target && event.target.id === "submit-enigme") {
       const inputElement = document.getElementById("animal-question");
       if (inputElement) {
         user.enigme = inputElement.value;
+        DOMReference.dialogueContainer.classList.toggle("hidden");
+      }
+    } else if (event.target && event.target.id === "submit-alarm") {
+      const inputElement = document.getElementById("alarm-question");
+      if (inputElement) {
+        user.codeChoice = inputElement.value;
+        console.log(user.codeChoice);
+        gameItem.deactivateAlarm(+user.codeChoice);
+        console.log(gameItem.alarm);
         DOMReference.dialogueContainer.classList.toggle("hidden");
       }
     }
