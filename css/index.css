@@ -1,4 +1,5 @@
 @import url("variables.css");
+
 .header {
   position: relative;
   height: 40vh;
@@ -18,56 +19,73 @@
     opacity: 0.2;
   }
 }
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: var(--clr-neutral-500);
-}
 
-header {
- 
+
+.caroussel {
+  display: flex;
   padding: 10px 0;
   text-align: center;
 }
-
-main {
+.caroussel__title{
   padding: 20px;
-}
-.game {
-  
-  border: 1px solid;
-  border-radius: 8px;
-  padding: 16px;
-  margin-bottom: 20px;
-  box-shadow: 0 0 10px(0, 0, 0, 0.1);
   text-align: center;
 }
-.hero-image, .screen-image {
-  width: 100%;
-  max-width: 300px;
-  height: auto;
-  display: block;
-  margin: 0 auto 10px;
+.caroussel__card {
+  padding: 20px;
+
+}
+.caroussel__avatar{
+    border: 1px solid;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 10px(0, 0, 0, 0.1);
+    text-align: center;
+}
+.caroussel__image{
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    display: block;
+    margin: 0 auto 10px;
+
+}
+.caroussel__description{
+    font-size: 16px;
+    color:salmon ; 
+    margin: 10px 0;
+
+
+}
+.caroussel__button {
+  background-color: grey; 
+    color: white; 
+    padding: 10px 20px; 
+    border: none; 
+    border-radius: 50px; 
+    font-size: 16px; 
+    cursor: pointer; 
+    transition: background-color 0.3s;
 }
 
-.description {
-  font-size: 16px;
-  
-  margin: 10px 0;
-}
-.play-button {
- 
-  padding: 10px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 16px;
-}
 
-.play-button:hover {
-  background-color:greenyellow ; 
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .footer {
   display: flex;
   background-color: var(--clr-accent-2);
