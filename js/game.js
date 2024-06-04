@@ -181,6 +181,50 @@ const gameActions = {
       );
     }
   },
+
+  paintingSpiderman() {
+    gameUtilities.sendDialog(user.name,
+      "Notre bon Sipder-Man, beaucoup trop musclé pour ce qu'il est..."
+    );
+  },
+
+  paintingSpicyGirls() {
+    gameUtilities.sendDialog(user.name,
+      "Elles étais pas 3 à un moment ? Ou mes yeux me joue des tours ?"
+    );
+  },
+
+  paintingSuperPasNet() {
+    gameUtilities.sendDialog(user.name,
+      "Super Pas Net, le seul super hero qu'on ne peux pas voir correctement, tout de compliqué, même son nom de héro..."
+    );
+  },
+
+  PaintingAvainJers() {
+    gameUtilities.sendDialog(user.name,
+      "Mes préferé ! Les Avain-Jers, merci Diswen pour ce cadeau !"
+    );
+  },
+
+  paintingLuckyLuc() {
+    gameUtilities.sendDialog(user.name,
+      "Lucky Luc ? Mais ?! Qu'est ce qu'il fiche ici ?!"
+    );
+  },
+
+  paintingSuperEgirl() {
+    gameUtilities.sendDialog(user.name,
+      "Super E-Girl..Tout pour me faire rêver..."
+    );
+  },
+
+  paintingSuper4D() {
+    gameUtilities.sendDialog(user.name,
+      "Il parrait que Super4D détiens ses pouvoirs de ces 25 personnalitée, ils prennents tant de place qu'il passe les dimentions !"
+    );
+  },
+
+
 };
 
 const rooms = {
@@ -195,6 +239,24 @@ const rooms = {
       </map>
     `;
   },
+
+  galleryRoom() {
+    DOMReference.image.src = "../img/art-gallery.webp";
+    DOMReference.usemap.innerHTML = `
+    <map name="image-map">
+    <area id="paintingSpiderman" target="" alt="tableau spider man musclé" title="Regarder ce super tableau" href="" coords="324,0,539,125,530,543,316,571,324,2" shape="poly">
+    <area id="paintingSpicyGirls" target="" alt="tableau spyci girls" title="Regarder ce super tableau de fou" href="" coords="569,168,710,266,704,529,568,540" shape="poly">
+    <area id="paintingSuperPasNet" target="" alt="tableau super pas net" title="Regarder ce tableau de dingue" href="" coords="754,281,824,335,824,523,751,526" shape="poly">
+    <area id="paintingAvainJers" target="" alt="tableau les avengers" title="Regarder ce tableau EXEPTIONNEL" href="" coords="854,260,1077,535" shape="rect">
+    <area id="paintingLuckyLuc" target="" alt="tableau de lucky luck " title="Regarder ce tableau..." href="" coords="1107,521,1161,532,1153,291,1104,326" shape="poly">
+    <area id="paintingSuperEgirl" target="" alt="tableau super girl" title="Regarder ce tabl..." href="" coords="1242,203,1169,269,1171,527,1251,530" shape="poly">
+    <area id="paintingSuper4D" target="" alt="tableau super 4d" title="Regarder." href="" coords="1481,563,1478,8,1289,165,1291,543,1367,552" shape="poly">
+    <area id="bench" target="" alt="banc nul" title="Examiner ce banc banale" href="" coords="1304,682,1453,753,1442,879,1313,879,1209,773,1207,682" shape="poly">
+    <area id="hammer" target="" alt="marteau de la solution" title="Fouiller sournoisement" href="" coords="539,703,588,692,628,817,585,834,550,747" shape="poly">
+    <area id="doorToCostumeRoom" target="" alt="retour arrière" title="Revenir à la salle du costume" href="" coords="4,991,1790,1021" shape="rect">
+</map>
+`;
+  },
 };
 
 const changeRoom = {
@@ -208,6 +270,10 @@ const changeRoom = {
       );
     }
   },
+
+  doorToGalleryRoom() {
+    rooms.galleryRoom()
+  }
 };
 
 // Gestion des événements
