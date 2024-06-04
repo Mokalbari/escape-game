@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+
+    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/index.css" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Acme&family=Bangers&family=Walter+Turncoat&display=swap"
+      rel="stylesheet"
+    />
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slider d'Images</title>
+    <style>
+        
+        body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f4f4f4;
+}
+
+.slider {
+    position: relative;
+    width: 80%;
+    max-width: 800px;
+    overflow: hidden;
+}
+
+.slides {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+    min-width: 100%;
+    box-sizing: border-box;
+}
+
+.slide img {
+    width: 100%;
+    display: block;
+}
+
+.prev, .next {
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -22px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+    background-color: rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+}
+
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+.prev:hover, .next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+@media screen and (max-width:768px) {
+.logoandimg {
+    display: flex ;
+    align-items: center;
+    flex-direction: column;
+}
+body {
+  line: height 1px; ;
+}
+
+
+.caroussel {
+  display: flex;
+  padding: 10px 0;
+  text-align: center;
+  /* justify-content: space-around; */
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+.caroussel__title{
+  padding: 20px;
+  text-align: center;
+}
+.caroussel__card {
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+/* justify-content: space-around; */
+
+
+
+}
+.caroussel__avatar{
+    /* border: 1px solid; */
+    border-radius: 5rem;
+    /* margin-bottom: 20px; */
+    /* box-shadow: 0 0 10px(0, 0, 0, 0.1); */
+    /* width: 50px; */
+    padding-top: 100px;
+    
+}
+.caroussel__image{
+    /* width: 100%; */
+    /* max-width: 300px; */
+    /* height: auto; */
+    /* display: block; */
+    /* margin: 0 auto 10px; */
+
+}
+.caroussel__description{
+    font-size: 16px;
+    color:salmon ; 
+    margin: 10px 0;
+
+
+}
+.caroussel__button {
+  background-color: grey; 
+    color: white; 
+    padding: 10px 20px; 
+    border: none; 
+    border-radius: 50px; 
+    font-size: 16px; 
+    cursor: pointer; 
+    transition: background-color 0.3s;
+    text-align: center;
+}
+    </style>
+</head>
+<body>
+    <div class="slider">
+        <div class="slides">
+            <div class="slide">
+                <article class="caroussel__card">
+                    <img src="img/logo.png" alt="" class="caroussel__avatar"/>
+                    <img src="img/salleExpo2.jpeg" alt="" class="caroussel__image"/>
+                    <p class="caroussel__description">
+                      La soirée la plus attendue de l'année approche : le grand bal des
+                      super-héros. Pour y assister incognito et éblouir tout le monde,
+                      vous avez besoin du costume légendaire de l'invincible Captain
+                      Stellar, exposé dans le prestigieux Musée des Super-Héros.
+                      Cependant, ce n'est pas une tâche facile, le costume est protégé par
+                      des systèmes de sécurité.
+                    </p>
+                    <a href="./html/game.html" class="caroussel__button">Jouer maintenant</a>
+                  </article>
+            </div>
+            <div class="slide">
+                <article class="caroussel__card">
+                    <img src="img/logo.png" alt="" class="caroussel__avatar"/>
+                    <img src="img/salleExpoHero.jpeg" alt="" class="caroussel__image"/>
+                    <p class="caroussel__description">
+                      Le monde tel que vous le connaissiez a disparu. Une épidémie
+                      dévastatrice a transformé la majorité de la population en zombies
+                      affamés. En tant que survivants, vous êtes réfugiés dans une ville
+                      en ruines, luttant chaque jour pour échapper aux hordes de
+                      morts-vivants.
+                    </p>
+                    <a href="" class="caroussel__button">Jouer maintenant</a>
+                  </article>
+            </div>
+            <div class="slide">
+                <article class="caroussel__card">
+                   
+                    <div class="logoandimg">
+
+                    <img src="img/logo.png" alt="" class="caroussel__avatar"/>
+                  <img src="img/salleExpo2.jpeg" alt="" class="caroussel__image"/>
+                  </div>
+
+                    <p class="caroussel__description">
+                      Le célèbre manoir Blackwood a été le théâtre d'un crime odieux. Le
+                      riche propriétaire, Lord Blackwood, a été retrouvé mort dans son
+                      bureau, et les circonstances de sa mort sont des plus mystérieuses.
+                      Vous êtes des détectives privés réputés, appelés d'urgence pour
+                      élucider ce meurtre avant que le coupable ne frappe à nouveau.
+                    </p>
+                    <a href="" class="caroussel__button">Jouer maintenant</a>
+                  </article>
+            </div>
+        </div>
+        <button class="prev" onclick="changeSlide(-1)">&#10094;</button>
+        <button class="next" onclick="changeSlide(1)">&#10095;</button>
+    </div>
+    <script > 
+    let currentSlide = 0;
+
+function changeSlide(n) {
+    const slides = document.querySelectorAll('.slide');
+    currentSlide += n;
+
+    if (currentSlide >= slides.length) {
+        currentSlide = 0;
+    }
+    if (currentSlide < 0) {
+        currentSlide = slides.length - 1;
+    }
+
+    const newTransform = -currentSlide * 100 + '%';
+    document.querySelector('.slides').style.transform = `translateX(${newTransform})`;
+}
+
+
+changeSlide(0);
+
+    </script>
+</body>
+</html>

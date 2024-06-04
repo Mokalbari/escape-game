@@ -25,6 +25,9 @@
   display: flex;
   padding: 10px 0;
   text-align: center;
+  justify-content: space-around;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
 }
 .caroussel__title{
   padding: 20px;
@@ -32,15 +35,22 @@
 }
 .caroussel__card {
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+justify-content: space-between;
+
+
 
 }
 .caroussel__avatar{
-    border: 1px solid;
-    border-radius: 8px;
-    padding: 16px;
+    /* border: 1px solid; */
+    border-radius: 10rem;
     margin-bottom: 20px;
-    box-shadow: 0 0 10px(0, 0, 0, 0.1);
-    text-align: center;
+    /* box-shadow: 0 0 10px(0, 0, 0, 0.1); */
+    width: 150px;
+    margin:0 auto;
+    
 }
 .caroussel__image{
     width: 100%;
@@ -67,24 +77,6 @@
     cursor: pointer; 
     transition: background-color 0.3s;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 .footer {
   display: flex;
