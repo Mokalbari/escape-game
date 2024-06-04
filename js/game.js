@@ -181,6 +181,20 @@ const gameActions = {
       );
     }
   },
+
+  computer() {
+    gameUtilities.sendDialog(user.name,"Quel est le code de l'ordinateur du savoir ?")
+  },
+
+  frame() {
+    gameUtilities.sendDialog(user.name,"Ce cadre est exeptionnel, que cache t'il ?")
+  },
+
+  drawers() {
+    gameUtilities.sendDialog(user.name,"J'adore la paperasse, essayez de deviner quel document secret s'y trouve")
+  },
+
+
 };
 
 const rooms = {
@@ -195,6 +209,19 @@ const rooms = {
       </map>
     `;
   },
+
+  officeRoom() {
+    DOMReference.image.src = "../img/office2.webp";
+    DOMReference.usemap.innerHTML = `
+    <map name="image-map">
+      <area id="computer" target="" alt="ordinateur" title="Allumer l'ordinateur" href="" coords="1222,433,1036,601" shape="rect">
+      <area id="documentStorage" target="" alt="range-documents" title="Ouvrir le range-documents" href="" coords="1240,513,1365,634" shape="rect">
+      <area id="drawers" target="" alt="tiroirs " title="Ouvrir les tiroirs " href="" coords="950,639,1141,954" shape="rect">
+      <area id="frame" target="" alt="grand cadre" title="Cliquez sur le grand cadre" href="" coords="1073,151,1315,428" shape="rect">
+     <area id="doorToCostumeRoom" target="" alt="Ouvrir la porte du bureau" title="porte du bureau" href="" coords="361,780,708,136" shape="rect">
+    </map>`
+  },
+
 };
 
 const changeRoom = {
@@ -208,6 +235,9 @@ const changeRoom = {
       );
     }
   },
+  doorToOffice() {
+    rooms.officeRoom()
+  }
 };
 
 // Gestion des événements
