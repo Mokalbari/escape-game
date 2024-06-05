@@ -3,11 +3,12 @@ const createUser = (name) => {
   return {
     name,
     enigme: "",
-    key: true,
+    key: false,
     code: "",
     codeChoice: "",
     card: false,
     hammer: false,
+    inventory: [],
   };
 };
 
@@ -43,6 +44,8 @@ const DOMReference = (() => {
   const closeButton = document.querySelector("#closeButton");
   const dropdownBtn = document.querySelector(".dropdown-btn");
   const dropdownMenu = document.querySelector(".dropdown-menu-content");
+  const userInventory = document.querySelector("#userIventory");
+  const exitButton = document.querySelector("#exitButton");
 
   return {
     body,
@@ -54,6 +57,8 @@ const DOMReference = (() => {
     closeButton,
     dropdownBtn,
     dropdownMenu,
+    userInventory,
+    exitButton,
   };
 })();
 
@@ -70,6 +75,17 @@ const gameUtilities = (() => {
   };
 })();
 
+const updateInventory = (dom, inventory) => {
+  dom.innerHTML = "";
+  inventory.forEach((item) => {
+    const li = document.createElement("li");
+    li.textContent = item;
+    dom.appendChild(li);
+  });
+};
+
+const pushToUserInventory = (item) => user.inventory.push(item);
+
 // Création d'objets pour encapsuler la logique du jeu
 // Stocker dans cet objet toutes les fonctions qui contiennent les scripts qui doivent être exécutés lorsqu'une zone est cliquée.
 const gameActions = {
@@ -81,6 +97,8 @@ const gameActions = {
       );
     } else if (user.enigme === gameItem.enigme) {
       user.key = true;
+      pushToUserInventory("Clé vers la salle des costumes");
+      updateInventory(DOMReference.userInventory, user.inventory);
       gameUtilities.sendDialog(
         "Concierge",
         `C'est bien ça... La réponse est "${gameItem.enigme}" pierres d'infinités. Voici la clé de la salle des costumes. Ne touchez rien s'il vous plait.`
@@ -116,6 +134,8 @@ const gameActions = {
       );
       user.code = gameItem.code;
       user.card = true;
+      pushToUserInventory(`Carte avec un code : ${gameItem.code}`);
+      updateInventory(DOMReference.userInventory, user.inventory);
     }
   },
 
@@ -154,6 +174,8 @@ const gameActions = {
         "Ah ! Un marteau ! Ce n'est pas Mijolnir mais il peut être utile..."
       );
       user.hammer = true;
+      pushToUserInventory("Marteau");
+      updateInventory(DOMReference.userInventory, user.inventory);
     }
   },
 
@@ -242,6 +264,8 @@ const gameActions = {
       user.name,
       "Loading system... ./user/document/museum/password/4567 ... Hmmmm. Ca peut m-être utile pour désactiver l'alarme ? Je garde ça en tête."
     );
+    pushToUserInventory("Code de l'ordinateur : 4567");
+    updateInventory(DOMReference.userInventory, user.inventory);
   },
 
   frame() {
@@ -256,6 +280,8 @@ const gameActions = {
       user.name,
       "Pas rangée cette paperasse. Tiens... Il y a un mot d'écrit : 'J'aime le poulet'... Un indice ?"
     );
+    pushToUserInventory("Document avec écrit 'J'aime le poulet");
+    updateInventory(DOMReference.userInventory, user.inventory);
   },
 };
 
@@ -441,4 +467,8 @@ DOMReference.dropdownBtn.addEventListener("click", () => {
   DOMReference.dropdownMenu.classList.toggle("visible");
   DOMReference.dropdownBtn.classList.toggle("bx-x");
   DOMReference.dropdownBtn.classList.toggle("bx-menu");
+});
+
+DOMReference.exitButton.addEventListener("click", () => {
+  window.location.href = "../index.html";
 });
