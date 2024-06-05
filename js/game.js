@@ -1,13 +1,17 @@
 // Fonctions fabrique pour créer des objets User et GameItem
-const createUser = (name) => {
+const createUser = () => {
   return {
-    name,
+    name:"Joueur",
     enigme: "",
     key: true,
     code: "",
     codeChoice: "",
     card: false,
     hammer: false,
+    own: false,
+    dress: false,
+    jacket: false,
+    
   };
 };
 
@@ -28,7 +32,7 @@ const createGameItem = (enigme, code, alarm, glass) => {
 };
 
 // Création des instances
-const user = createUser("Michel");
+const user = createUser();
 const gameItem = createGameItem("poulet", 2337, true, true);
 
 // Module pour les références DOM
@@ -113,7 +117,7 @@ const gameActions = {
     } else {
       gameUtilities.sendDialog(
         user.name,
-        "Ah ! Une carte ! Je vais noter le code dans mon inventaire."
+        "Ah ! Une carte ! Je vais noter le code."
       );
       user.code = value;
       user.card = true;
@@ -228,7 +232,75 @@ const gameActions = {
       "Je ne peux pas perdre mon temps à m'assoir sur les bancs ! Vous ne m'aurez pas, complotisateur !"
     );
   },
+  bed() {
+    gameUtilities.sendDialog(user.name,
+      `J'aurais tord de ne pas profiter de cette langueur pour faire une grâce mat', pionssé, ou secouer cette feignasse... Allez debout ${user.name}`
+    );
+  },
+  window() {
+    gameUtilities.sendDialog(user.name,
+      "Un beau dimanche qui s'annonce, personne dans les rues, encore moins au musée..."
+    );
+  },
+  ground() {
+    gameUtilities.sendDialog(user.name,
+      "Aaaaarg... C'est d'un bazard sans nom... Je le jure, je rangerais... La semaine prochaine ?"
+    );
+  },
+  sink(user) {
+    if (user.own) {
+      gameUtilities.sendDialog(
+        user.name,
+        "Je me suis déjà mis un coup d'eau... Je tourne en rond."
+      );
+    } else {
+      gameUtilities.sendDialog(user.name,
+        "Petite toilette qui va faire du bien ♪"
+      );
+      user.own = true;
+    }
+  },
 
+  laundry(user) {
+    if (user.dress) {
+      gameUtilities.sendDialog(
+        user.name,
+        "Je ne pourrais pas trouver de vêtement moins sale que ceux que j'ai sur moi... Malheureusement.."
+      );
+    } else {
+      gameUtilities.sendDialog(user.name,
+        "Bon, à défaut de ne pas avoir de linge propre...j'en ai peut être de moins sale ?"
+      );
+      user.dress = true;
+    }
+  },
+
+  wardrobe(user) {
+    if (user.jacket) {
+      gameUtilities.sendDialog(user.name,
+        "Peut-être que j'ai d'autres vestes moins froissée ? Peut-être celle...CI !...Ha, elle à des trous..."
+      );
+    } else {
+      gameUtilities.sendDialog(user.name,
+        "Une veste propre.... Celle ci ira, Berk... une coulante de pigeon sechée sur l'épaule...Comment j'ai pu ne pas voir ça ?!"
+      );
+      user.jacket = true;
+    }
+  },
+
+  wc() {
+    gameUtilities.sendDialog(user.name,
+      "J'espère que les syndicats feront vite pour faire déboucher la colonne des toilettes..."
+    );
+  },
+
+  mirror() {
+    gameUtilities.sendDialog(user.name,
+      `L'alarme est connectée à la vitrine. Si j'ouvre la vitrine sans la désactiver je de rencontrer Batman dans de mauvaise circonstance.
+    <input id="name-question" type="text">
+    <button id="submit-name">Je m'appelle comme ça !</button>`
+    )
+  }
 };
 
 const rooms = {
@@ -261,6 +333,57 @@ const rooms = {
 </map>
 `;
   },
+
+  bedRoom() {
+    DOMReference.image.src = "../img/bedroom.webp";
+    DOMReference.usemap.innerHTML = `
+    <map name="image-map">
+    <area id="bed" target="" alt="Se recoucher" title="Se recoucher" href="" coords="700,893,865,690,854,590,406,563,59,714,59,833,151,788,265,804,289,878" shape="poly">
+    <area id="sink" target="" alt="Se débarbouiller" title="Se débarbouiller" href="" coords="1508,641,1560,644,1595,630,1584,552,1509,588,1451,593,1459,626" shape="poly">
+    <area id="mirror" target="" alt="S'admirer dans le miroir" title="S'admirer dans le miroir" href="" coords="1674,419,1774,445,1771,214,1674,218" shape="poly">
+    <area id="wc" target="" alt="Déposer les amis à la piscine" title="Déposer les amis à la piscine" href="" coords="1114,546,1079,527,1080,486,1161,478,1164,589,1112,581" shape="poly">
+    <area id="doorInOutside" target="" alt="Sortir de l'appartement" title="Sortir de l'appartement" href="" coords="515,177,685,190,686,571,515,565,511,421" shape="poly">
+    <area id="laundry" target="" alt="Chercher du linge presque propre" title="Chercher du linge presque propre" href="" coords="290,931,197,980,70,956,31,920,56,847,151,795,251,806,281,861" shape="poly">
+    <area id="wardrobe" target="" alt="Attraper la veste la moins froissée" title="Attraper la veste la moins froissée" href="" coords="1198,231,1199,611,1237,652,1240,223" shape="poly">
+    <area id="window" target="" alt="Regarder par la fenêtre" title="Regarder par la fenêtre" href="" coords="1430,519,1620,557,1633,93,1416,136" shape="poly">
+    <area id="ground" target="" alt="Se consterner devant l'état de l'appartement" title="Se consterner devant l'état de l'appartement" href="" coords="889,657,712,921,328,923,178,1011,1551,1015,1186,630,1035,625,1001,660" shape="poly">
+</map>
+`;
+  },
+
+  lobbyRoom() {
+    DOMReference.image.src = "../img/lobby.png";
+    DOMReference.usemap.innerHTML = `
+      <map name="lobby-map" id="mapContainer">
+        <area
+          target=""
+          alt="Parler au concierge"
+          title="Parler au concierge"
+          href="#"
+          coords="323,269,697,617"
+          shape="rect"
+          id="enigme"
+        />
+        <area
+          target=""
+          alt="Aller à la salle des costumes"
+          title="Aller à la salle des costumes"
+          href="#"
+          coords="1349,312,1669,666"
+          shape="rect"
+          id="doorToCostumeRoom"
+        />
+        <area
+          target=""
+          alt="Aller aux toilettes"
+          title="Aller aux toilettes"
+          href="#"
+          coords="1053,350,1045,722,1249,647,1243,404,1162,385"
+          shape="poly"
+          id="doorToToilets"
+        />
+      </map>`
+  }
 };
 
 const changeRoom = {
@@ -329,6 +452,9 @@ DOMReference.body.addEventListener("click", (event) => {
     case "bench":
       gameActions.bench();
       break;
+    case "mirror":
+      gameActions.mirror();
+      break;
     
   }
 });
@@ -350,6 +476,12 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log(user.codeChoice);
         gameItem.deactivateAlarm(+user.codeChoice);
         console.log(gameItem.alarm);
+        DOMReference.dialogueContainer.classList.toggle("hidden");
+      }
+    } else if (event.target && event.target.id === "submit-name") {
+      const inputElement = document.getElementById("name-question");
+      if (inputElement) {
+        user.name = inputElement.value;
         DOMReference.dialogueContainer.classList.toggle("hidden");
       }
     }
