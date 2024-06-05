@@ -17,20 +17,30 @@
   </head>
   <body>
     <header class="header">
-      <img src="img/logo.png" alt="Hero'Scaoe" class="header__logo" />
+      <div>
+        <p></p>
+        <p>
+          <ul>
+            <li>Home</li>
+            <li>About</li>
+            <li>Games</li>
+            <li>Contact</li>
+          </ul>
+        </p>
+      </div>
+      <!-- <img src="img/logo.png" alt="Hero'Scaoe" class="header__logo" />
       <img
         src="img/logo 2.jpg"
         alt="Fond style comic book"
         class="header__background"
-      />
+      /> -->
     </header>
-
-    <main>
-      <section>
+  <main>
+      <section class="hero__section">
         <img src="" alt="" />
-        <div>
-          <h1>Découvrez l'aventure évasion ultime avec Hero'scape !</h1>
-          <p>
+        <div class="div__hero">
+          <h1>Bienvenue sur Hero'scape !</h1>
+          <p class="intro">
             Plongez dans un monde où chaque porte mène à une nouvelle énigme,
             chaque indice vous rapproche de la liberté, et chaque seconde
             compte. Chez Hero'scape, nous transformons l'ordinaire en
@@ -38,11 +48,37 @@
             mettront à l'épreuve votre esprit, votre ingéniosité et votre esprit
             d'équipe.
           </p>
-          <a href=""></a>
+          <button class="btn__hero__section"><a href=""></a>Commencez l' aventure!</button>
         </div>
       </section>
-      <section>
-        <h2>Notre sélection de jeux</h2>
+      <section class="game__choice">
+        <div class="container__hero">
+          <div class="card-game">
+            <!-- <div class="border-img1"> -->
+              <img src="./img/section_choice/sectionGame_choiceHero1.png" class="imgHero">
+            <!-- </div> -->
+            <h1>House Hell</h1>
+            <img src="./img/section_choice/sectionGame_choice1.jpg" class="imgGameChoice">
+            <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque eum a alias voluptas cupiditate facere nesciunt facilis quibusdam repellat, fugiat magnam repellendus quia accusantium aspernatur. Adipisci consequuntur tempora necessitatibus magnam!<
+            </p>
+          </div>      
+         <div class="card-game">
+            <img src="./img/section_choice/sectionGame_choiceHero2.png" class="imgHero">
+            <h1>Dark Museum</h1>
+            <img src="./img/section_choice/sectionGameChoice2_.jpg"  class="imgGameChoice">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In ipsum iste ipsam repellat recusandae culpa obcaecati dicta quisquam quibusdam id eveniet ipsa vitae tempore illum, nobis corporis assumenda omnis eligendi?</p>  
+          </div>
+          <div class="card-game">
+            <img src="./img/section_choice/sectionGame_choiceHero3.png" class="imgHero">
+            <h1>House Room</h1>
+            <img src="./img/section_choice/sectionGame_choice3.jpg" class="imgGameChoice">
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Distinctio dolor repudiandae consequatur, quas sit unde ullam alias esse iste quae exercitationem. Excepturi delectus aspernatur numquam tenetur sed repellat eveniet iusto?</p>        
+               
+          </div>
+          <div class="btn-container"><button>1</button><button>2</button><button>3</button>
+        </div>
+
+        <!-- <h2>Notre sélection de jeux</h2>
         <article>
           <img src="" alt="" />
           <img src="" alt="" />
@@ -79,7 +115,7 @@
             élucider ce meurtre avant que le coupable ne frappe à nouveau.
           </p>
           <a href="">Jouer maintenant</a>
-        </article>
+        </article> -->
       </section>
     </main>
 
