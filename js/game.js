@@ -3,7 +3,7 @@ const createUser = (name) => {
   return {
     name,
     enigme: "",
-    key: false,
+    key: true,
     code: "",
     codeChoice: "",
     card: false,
@@ -235,7 +235,7 @@ const rooms = {
         <area target="" alt="Tenter d'ouvrir le présentoir à costume." title="Tenter d'ouvrir le présentoir à costume." href="#" id="glass" coords="533,141,1198,673" shape="rect">
         <area target="" alt="Manipuler l'alarme" title="Manipuler l'alarme" href="#" id="alarm" coords="1202,442,1285,562" shape="rect">
         <area target="" alt="Aller vers une pièce (gauche)" title="Aller vers une pièce (gauche)" href="#" id="doorToLeft" coords="104,122,507,840" shape="rect">
-        <area target="" alt="Aller vers une pièce (droite)" title="Aller vers une pièce (droite)" href="#" id="doorToRight" coords="1242,161,1680,809" shape="rect">
+        <area target="" alt="Aller vers le mur des héros" title="Aller vers le mur des héros" href="#" id="doorToGalleryRoom" coords="1242,161,1680,809" shape="rect">
       </map>
     `;
   },
@@ -298,6 +298,8 @@ DOMReference.body.addEventListener("click", (event) => {
     case "closeButton":
       DOMReference.dialogueContainer.classList.toggle("hidden");
       break;
+    case "doorToGalleryRoom":
+      changeRoom.doorToGalleryRoom();
   }
 });
 
