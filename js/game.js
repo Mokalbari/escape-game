@@ -271,6 +271,7 @@ const gameActions = {
       user.clean = true;
     }
   },
+
   laundry() {
     if (user.dress) {
       gameUtilities.sendDialog(
@@ -285,6 +286,7 @@ const gameActions = {
       user.dress = true;
     }
   },
+
   wardrobe() {
     if (user.jacket) {
       gameUtilities.sendDialog(
