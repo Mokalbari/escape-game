@@ -278,6 +278,10 @@ DOMReference.body.addEventListener("click", (event) => {
     case "doorToOffice" :
       changeRoom.doorToOffice()
       break;
+
+    case "card" :
+      gameActions.card(user, gameItem)
+      break;
   }
 });
 
