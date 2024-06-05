@@ -242,7 +242,7 @@ const gameActions = {
   bed() {
     gameUtilities.sendDialog(
       user.name,
-      `J'aurais tord de ne pas profiter de cette langueur pour faire une grâce mat', pionssé, ou secouer cette feignasse... Allez debout ${user.name}`
+      `Ce serait dommage ne pas profiter de cette langueur pour faire une grâce mat', pioncer, ou secouer cette feignasse... Allez debout ${user.name} !`
     );
   },
   window() {
@@ -254,7 +254,7 @@ const gameActions = {
   ground() {
     gameUtilities.sendDialog(
       user.name,
-      "Aaaaarg... C'est d'un bazard sans nom... Je le jure, je rangerais... La semaine prochaine ?"
+      "Aaaaarg... C'est d'un bazar sans nom... Je le jure, je rangerai... La semaine prochaine ?"
     );
   },
   sink() {
@@ -276,12 +276,12 @@ const gameActions = {
     if (user.dress) {
       gameUtilities.sendDialog(
         user.name,
-        "Je ne pourrais pas trouver de vêtement moins sale que ceux que j'ai sur moi... Malheureusement.."
+        "Je ne pourrais pas trouver de vêtements moins sales que ceux que j'ai sur moi... Malheureusement..."
       );
     } else {
       gameUtilities.sendDialog(
         user.name,
-        "Bon, à défaut de ne pas avoir de linge propre...j'en ai peut être de moins sale ?"
+        "Bon, à défaut de ne pas avoir de linges propres...j'en ai peut être de moins sales ?"
       );
       user.dress = true;
     }
@@ -291,12 +291,12 @@ const gameActions = {
     if (user.jacket) {
       gameUtilities.sendDialog(
         user.name,
-        "Peut-être que j'ai d'autres vestes moins froissée ? Peut-être celle...CI !...Ha, elle à des trous..."
+        "Peut-être que j'ai d'autres vestes moins froissées ? Peut-être celle...CI !...Ha, elle à des trous..."
       );
     } else {
       gameUtilities.sendDialog(
         user.name,
-        "Une veste propre.... Celle ci ira, je pense"
+        "Une veste propre.... Celle-ci ira, je pense."
       );
       user.jacket = true;
       user.dress = true;
@@ -312,14 +312,14 @@ const gameActions = {
     if (user.name === "&nbsp;") {
       gameUtilities.sendDialog(
         user.name,
-        `Mon rêve cette est était tellement étrannge que j'en ai oublier mon nom...Comment je m'appelle déjà ?
+        `Mon rêve cette est était tellement étrange que j'en ai oublier mon nom... Comment je m'appelle déjà ?
     <input id="name-question" type="text">
-    <button id="submit-name">Je m'appelle comme ça !</button>`
+    <button id="submit-name">Ah oui ! Je m'appelle comme ça !</button>`
       );
     } else {
       gameUtilities.sendDialog(
         user.name,
-        "Il faut vraiment que j'arrête ces somnifer que m'a passé Jessy, ca me fait faire des nuits vraiment bizarre..."
+        "Il faut vraiment que j'arrête les smonifères que Jessy m'a filé, ca me fait faire des nuits vraiment bizarres..."
       );
     }
   },
@@ -327,7 +327,7 @@ const gameActions = {
   computer() {
     gameUtilities.sendDialog(
       user.name,
-      "Loading system... ./user/document/museum/password/4567 ... Hmmmm. Ca peut m-être utile pour désactiver l'alarme ? Je garde ça en tête."
+      "Loading system... ./user/document/museum/password/4567... Hmmmm. Ca peut m'être utile pour désactiver l'alarme ? Je garde ça en tête."
     );
   },
 
@@ -341,7 +341,7 @@ const gameActions = {
   drawers() {
     gameUtilities.sendDialog(
       user.name,
-      "Pas rangée cette paperasse. Tiens... Il y a un mot d'écrit : 'J'aime le poulet'... Un indice ?"
+      "Pas rangée cette paperasse ! On dirait mon appartement. Non quand même pas. Tiens... Il y a un mot d'écrit : 'J'aime le poulet'... Un indice ?"
     );
   },
 };
@@ -462,6 +462,7 @@ const changeRoom = {
   doorToOffice() {
     rooms.officeRoom();
   },
+
   doorToLobbyRoom() {
     if (user.name !== "&nbsp;" && user.clean && user.dress) {
       rooms.lobbyRoom();
