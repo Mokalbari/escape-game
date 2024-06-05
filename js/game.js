@@ -1,7 +1,7 @@
 // Fonctions fabrique pour créer des objets User et GameItem
 const createUser = () => {
   return {
-    name:"Joueur",
+    name:"&nbsp;",
     enigme: "",
     key: true,
     code: "",
@@ -247,7 +247,7 @@ const gameActions = {
       "Aaaaarg... C'est d'un bazard sans nom... Je le jure, je rangerais... La semaine prochaine ?"
     );
   },
-  sink(user) {
+  sink() {
     if (user.own) {
       gameUtilities.sendDialog(
         user.name,
@@ -260,8 +260,7 @@ const gameActions = {
       user.own = true;
     }
   },
-
-  laundry(user) {
+  laundry() {
     if (user.dress) {
       gameUtilities.sendDialog(
         user.name,
@@ -274,33 +273,36 @@ const gameActions = {
       user.dress = true;
     }
   },
-
-  wardrobe(user) {
+  wardrobe() {
     if (user.jacket) {
       gameUtilities.sendDialog(user.name,
         "Peut-être que j'ai d'autres vestes moins froissée ? Peut-être celle...CI !...Ha, elle à des trous..."
       );
     } else {
       gameUtilities.sendDialog(user.name,
-        "Une veste propre.... Celle ci ira, Berk... une coulante de pigeon sechée sur l'épaule...Comment j'ai pu ne pas voir ça ?!"
+        "Une veste propre.... Celle ci ira, je pense"
       );
       user.jacket = true;
     }
   },
-
   wc() {
     gameUtilities.sendDialog(user.name,
       "J'espère que les syndicats feront vite pour faire déboucher la colonne des toilettes..."
     );
   },
-
   mirror() {
+    if (user.name ==="&nbsp;") {
     gameUtilities.sendDialog(user.name,
-      `L'alarme est connectée à la vitrine. Si j'ouvre la vitrine sans la désactiver je de rencontrer Batman dans de mauvaise circonstance.
+      `Mon rêve cette est était tellement étrannge que j'en ai oublier mon nom...Comment je m'appelle déjà ?
     <input id="name-question" type="text">
     <button id="submit-name">Je m'appelle comme ça !</button>`
     )
+  } else {
+    gameUtilities.sendDialog(user.name,
+      "Il faut vraiment que j'arrête ces somnifer que m'a passé Jessy, ca me fait faire des nuits vraiment bizarre..."
+    );
   }
+  },
 };
 
 const rooms = {
@@ -383,7 +385,7 @@ const rooms = {
           id="doorToToilets"
         />
       </map>`
-  }
+  },
 };
 
 const changeRoom = {
@@ -400,7 +402,16 @@ const changeRoom = {
 
   doorToGalleryRoom() {
     rooms.galleryRoom()
-  }
+  },
+  doorToLobbyRoom() {
+    if (user.name !== "&nbsp;" && user.own && user.dress) {
+      rooms.lobbyRoom()
+    } else {
+      gameUtilities.sendDialog(user.name,
+        "Où est-ce que je vais ? Je ne peux pas partir dans cet état !"
+      );
+    }
+  },
 };
 
 // Gestion des événements
@@ -455,7 +466,30 @@ DOMReference.body.addEventListener("click", (event) => {
     case "mirror":
       gameActions.mirror();
       break;
-    
+    case "bed":
+      gameActions.bed();
+      break; 
+    case "wc":
+      gameActions.wc();
+      break;
+    case "sink":
+      gameActions.sink();
+      break;
+    case "doorToLobbyRoom":
+      changeRoom.doorToLobbyRoom();
+      break;
+    case "laundry":
+      gameActions.laundry();
+      break;
+    case "wardrobe":
+      gameActions.wardrobe();
+      break;
+    case "window":
+      gameActions.window();
+      break;
+    case "ground":
+      gameActions.ground();
+      break;
   }
 });
 
