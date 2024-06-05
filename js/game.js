@@ -113,7 +113,7 @@ const gameActions = {
     } else {
       gameUtilities.sendDialog(
         user.name,
-        "Ah ! Une carte ! Je vais noter le code dans mon inventaire."
+        "Ah tiens un code ! Notons vite ce code il pourrait nous servir"
       );
       user.code = value;
       user.card = true;
@@ -183,48 +183,74 @@ const gameActions = {
   },
 
   paintingSpiderman() {
-    gameUtilities.sendDialog(user.name,
+    gameUtilities.sendDialog(
+      user.name,
       "Notre bon Sipder-Man, beaucoup trop musclé pour ce qu'il est..."
     );
   },
 
   paintingSpicyGirls() {
-    gameUtilities.sendDialog(user.name,
+    gameUtilities.sendDialog(
+      user.name,
       "Elles étais pas 3 à un moment ? Ou mes yeux me joue des tours ?"
     );
   },
 
   paintingSuperPasNet() {
-    gameUtilities.sendDialog(user.name,
+    gameUtilities.sendDialog(
+      user.name,
       "Super Pas Net, le seul super hero qu'on ne peux pas voir correctement, tout de compliqué, même son nom de héro..."
     );
   },
 
   PaintingAvainJers() {
-    gameUtilities.sendDialog(user.name,
+    gameUtilities.sendDialog(
+      user.name,
       "Mes préferé ! Les Avain-Jers, merci Diswen pour ce cadeau !"
     );
   },
 
   paintingLuckyLuc() {
-    gameUtilities.sendDialog(user.name,
+    gameUtilities.sendDialog(
+      user.name,
       "Lucky Luc ? Mais ?! Qu'est ce qu'il fiche ici ?!"
     );
   },
 
   paintingSuperEgirl() {
-    gameUtilities.sendDialog(user.name,
+    gameUtilities.sendDialog(
+      user.name,
       "Super E-Girl..Tout pour me faire rêver..."
     );
   },
 
   paintingSuper4D() {
-    gameUtilities.sendDialog(user.name,
+    gameUtilities.sendDialog(
+      user.name,
       "Il parrait que Super4D détiens ses pouvoirs de ces 25 personnalitée, ils prennents tant de place qu'il passe les dimentions !"
     );
   },
 
+  computer() {
+    gameUtilities.sendDialog(
+      user.name,
+      "Quel est le code de l'ordinateur du savoir ?"
+    );
+  },
 
+  frame() {
+    gameUtilities.sendDialog(
+      user.name,
+      "Ce cadre est exeptionnel, que cache t'il ?"
+    );
+  },
+
+  drawers() {
+    gameUtilities.sendDialog(
+      user.name,
+      "J'adore la paperasse, essayez de deviner quel document secret s'y trouve"
+    );
+  },
 };
 
 const rooms = {
@@ -234,7 +260,7 @@ const rooms = {
       <map name="image-map">
         <area target="" alt="Tenter d'ouvrir le présentoir à costume." title="Tenter d'ouvrir le présentoir à costume." href="#" id="glass" coords="533,141,1198,673" shape="rect">
         <area target="" alt="Manipuler l'alarme" title="Manipuler l'alarme" href="#" id="alarm" coords="1202,442,1285,562" shape="rect">
-        <area target="" alt="Aller vers une pièce (gauche)" title="Aller vers une pièce (gauche)" href="#" id="doorToLeft" coords="104,122,507,840" shape="rect">
+        <area target="" alt="Aller vers le bureau" title="Aller vers le bureau" href="#" id="doorToOffice" coords="104,122,507,840" shape="rect">
         <area target="" alt="Aller vers le mur des héros" title="Aller vers le mur des héros" href="#" id="doorToGalleryRoom" coords="1242,161,1680,809" shape="rect">
       </map>
     `;
@@ -244,18 +270,29 @@ const rooms = {
     DOMReference.image.src = "../img/art-gallery.webp";
     DOMReference.usemap.innerHTML = `
     <map name="image-map">
-    <area id="paintingSpiderman" target="" alt="tableau spider man musclé" title="Regarder ce super tableau" href="" coords="324,0,539,125,530,543,316,571,324,2" shape="poly">
-    <area id="paintingSpicyGirls" target="" alt="tableau spyci girls" title="Regarder ce super tableau de fou" href="" coords="569,168,710,266,704,529,568,540" shape="poly">
-    <area id="paintingSuperPasNet" target="" alt="tableau super pas net" title="Regarder ce tableau de dingue" href="" coords="754,281,824,335,824,523,751,526" shape="poly">
-    <area id="paintingAvainJers" target="" alt="tableau les avengers" title="Regarder ce tableau EXEPTIONNEL" href="" coords="854,260,1077,535" shape="rect">
-    <area id="paintingLuckyLuc" target="" alt="tableau de lucky luck " title="Regarder ce tableau..." href="" coords="1107,521,1161,532,1153,291,1104,326" shape="poly">
-    <area id="paintingSuperEgirl" target="" alt="tableau super girl" title="Regarder ce tabl..." href="" coords="1242,203,1169,269,1171,527,1251,530" shape="poly">
-    <area id="paintingSuper4D" target="" alt="tableau super 4d" title="Regarder." href="" coords="1481,563,1478,8,1289,165,1291,543,1367,552" shape="poly">
-    <area id="bench" target="" alt="banc nul" title="Examiner ce banc banale" href="" coords="1304,682,1453,753,1442,879,1313,879,1209,773,1207,682" shape="poly">
-    <area id="hammer" target="" alt="marteau de la solution" title="Fouiller sournoisement" href="" coords="539,703,588,692,628,817,585,834,550,747" shape="poly">
-    <area id="doorToCostumeRoom" target="" alt="retour arrière" title="Revenir à la salle du costume" href="" coords="4,991,1790,1021" shape="rect">
+    <area id="paintingSpiderman" target="" alt="tableau spider man musclé" title="Regarder ce super tableau" href="#" coords="324,0,539,125,530,543,316,571,324,2" shape="poly">
+    <area id="paintingSpicyGirls" target="" alt="tableau spyci girls" title="Regarder ce super tableau de fou" href="#" coords="569,168,710,266,704,529,568,540" shape="poly">
+    <area id="paintingSuperPasNet" target="" alt="tableau super pas net" title="Regarder ce tableau de dingue" href="#" coords="754,281,824,335,824,523,751,526" shape="poly">
+    <area id="paintingAvainJers" target="" alt="tableau les avengers" title="Regarder ce tableau EXEPTIONNEL" href="#" coords="854,260,1077,535" shape="rect">
+    <area id="paintingLuckyLuc" target="" alt="tableau de lucky luck " title="Regarder ce tableau..." href="#" coords="1107,521,1161,532,1153,291,1104,326" shape="poly">
+    <area id="paintingSuperEgirl" target="" alt="tableau super girl" title="Regarder ce tabl..." href="#" coords="1242,203,1169,269,1171,527,1251,530" shape="poly">
+    <area id="paintingSuper4D" target="" alt="tableau super 4d" title="Regarder." href="#" coords="1481,563,1478,8,1289,165,1291,543,1367,552" shape="poly">
+    <area id="bench" target="" alt="banc nul" title="Examiner ce banc banale" href="#" coords="1304,682,1453,753,1442,879,1313,879,1209,773,1207,682" shape="poly">
+    <area id="hammer" target="" alt="marteau de la solution" title="Fouiller sournoisement" href="#" coords="539,703,588,692,628,817,585,834,550,747" shape="poly">
+    <area id="doorToCostumeRoom" target="" alt="retour arrière" title="Revenir à la salle du costume" href="#" coords="4,991,1790,1021" shape="rect">
 </map>
 `;
+  },
+  officeRoom() {
+    DOMReference.image.src = "../img/office2.webp";
+    DOMReference.usemap.innerHTML = `
+    <map name="image-map">
+      <area id="computer" target="" alt="ordinateur" title="Allumer l'ordinateur" href="#" coords="1222,433,1036,601" shape="rect">
+      <area id="card" target="" alt="range-documents" title="Ouvrir le range-documents" href="#" coords="1240,513,1365,634" shape="rect">
+      <area id="drawers" target="" alt="tiroirs " title="Ouvrir les tiroirs " href="#" coords="950,639,1141,954" shape="rect">
+      <area id="frame" target="" alt="grand cadre" title="Cliquez sur le grand cadre" href="#" coords="1073,151,1315,428" shape="rect">
+     <area id="doorToCostumeRoom" target="" alt="Ouvrir la porte du bureau" title="porte du bureau" href="#" coords="361,780,708,136" shape="rect">
+    </map>`;
   },
 };
 
@@ -272,8 +309,12 @@ const changeRoom = {
   },
 
   doorToGalleryRoom() {
-    rooms.galleryRoom()
-  }
+    rooms.galleryRoom();
+  },
+
+  doorToOffice() {
+    rooms.officeRoom();
+  },
 };
 
 // Gestion des événements
@@ -283,23 +324,46 @@ DOMReference.body.addEventListener("click", (event) => {
     case "enigme":
       gameActions.enigme(user, gameItem);
       break;
+
     case "doorToCostumeRoom":
       changeRoom.doorToCostumeRoom(user);
       break;
+
     case "hammer":
       gameActions.hammer(user);
       break;
+
     case "glass":
       gameActions.glass(user, gameItem);
       break;
+
     case "alarm":
       gameActions.alarm(user, gameItem);
       break;
+
     case "closeButton":
       DOMReference.dialogueContainer.classList.toggle("hidden");
       break;
+
     case "doorToGalleryRoom":
       changeRoom.doorToGalleryRoom();
+      break;
+
+    case "computer":
+      gameActions.computer();
+      break;
+
+    case "frame":
+      gameActions.frame();
+      break;
+
+    case "drawers":
+      gameActions.drawers();
+      break;
+
+    case "doorToOffice":
+      changeRoom.doorToOffice();
+      break;
   }
 });
 
