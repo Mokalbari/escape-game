@@ -128,14 +128,14 @@ const gameActions = {
     if (gameItem.alarm && !user.codeChoice) {
       gameUtilities.sendDialog(
         user.name,
-        `L'alarme est connectée à la vitrine. Si j'ouvre la vitrine sans la désactiver je risque d'attirer l'attention.
+        `L'alarme est connectée à la vitrine. Si j'ouvre la vitrine sans la désactiver je de rencontrer Batman dans de mauvaise circonstance.
     <input id="alarm-question" type="text">
     <button id="submit-alarm">Tester le code</button>`
       );
     } else if (gameItem.alarm && user.codeChoice) {
       gameUtilities.sendDialog(
         "Système de sécurité",
-        `Mauvais code saisi.     
+        `Mauvais saisi incorrect.     
       <input id="alarm-question" type="text">
       <button id="submit-alarm">Tester le code</button>`
       );
@@ -147,12 +147,12 @@ const gameActions = {
     if (user.hammer) {
       gameUtilities.sendDialog(
         user.name,
-        "J'ai déjà ce marteau. Peut-être que je peux m'en servir d'une manière ou d'une autre..."
+        "Bon je sais toujours ou est le marteau, je suis pas encore amnesique."
       );
     } else {
       gameUtilities.sendDialog(
         user.name,
-        "Ah ! Un marteau ! Intéressant... Je peux peut-être m'en servir."
+        "Ah ! Un marteau ! Ce n'est pas Mijolnir, mais il peut être utile..."
       );
       user.hammer = true;
     }
@@ -162,22 +162,22 @@ const gameActions = {
     if (user.hammer && !gameItem.alarm) {
       gameUtilities.sendDialog(
         user.name,
-        "Parfait ! J'ai désactivé l'alarme. Cassons cette vitre et prenons ce costume !"
+        "A-larme désactivééé ♪! Cassons cette vitre telle un grand méchant et filon en douce !"
       );
     } else if (!user.hammer && gameItem.alarm) {
       gameUtilities.sendDialog(
         user.name,
-        "Le costume ! Il est magnifique. Comment puis-je y accéder ?"
+        "Si je pouvais récupérer le costume de Captain Amerloque, je serais certainement le héro de cette soirée !"
       );
     } else if (user.hammer && gameItem.alarm) {
       gameUtilities.sendDialog(
         user.name,
-        "J'ai un marteau mais le système d'alarme est toujours activé. Si je casse la vitre je risque d'attirer l'attention."
+        "Si je casse la vitre avec l'alarme activé, je vais finir en zonzon entre le Pinguoin et Double-Face..."
       );
     } else if (!user.hammer && !gameItem.alarm) {
       gameUtilities.sendDialog(
         user.name,
-        "J'ai désactivé l'alarme. Maintenant comment puis-je ouvrir cette porte ?"
+        "Tra-vail terminééé ♪ ! Il faut maintenant le moyen d'ouvrir la porte."
       );
     }
   },
@@ -185,7 +185,7 @@ const gameActions = {
   paintingSpiderman() {
     gameUtilities.sendDialog(
       user.name,
-      "Notre bon Sipder-Man, beaucoup trop musclé pour ce qu'il est..."
+      "Notre bon Spider-Man, beaucoup trop musclé pour ce qu'il est..."
     );
   },
 
@@ -199,11 +199,11 @@ const gameActions = {
   paintingSuperPasNet() {
     gameUtilities.sendDialog(
       user.name,
-      "Super Pas Net, le seul super hero qu'on ne peux pas voir correctement, tout de compliqué, même son nom de héro..."
+      "Super pas-net, le seul super héro qu'on ne peux pas voir correctement, il est peut-être pas beau ?"
     );
   },
 
-  PaintingAvainJers() {
+  paintingAvainJers() {
     gameUtilities.sendDialog(
       user.name,
       "Mes préferé ! Les Avain-Jers, merci Diswen pour ce cadeau !"
@@ -220,17 +220,22 @@ const gameActions = {
   paintingSuperEgirl() {
     gameUtilities.sendDialog(
       user.name,
-      "Super E-Girl..Tout pour me faire rêver..."
+      "J'ai jamais pu entendre son super 'Eeeeh' qui fait la renomée de Super E-Girl"
     );
   },
 
   paintingSuper4D() {
     gameUtilities.sendDialog(
       user.name,
-      "Il parrait que Super4D détiens ses pouvoirs de ces 25 personnalitée, ils prennents tant de place qu'il passe les dimentions !"
+      "Il parrait que Super4D détiens ses pouvoirs de ces 25 personnalitées, ils prennents tant de place que Super4D peut passer les dimentions !"
     );
   },
-
+  bench() {
+    gameUtilities.sendDialog(
+      user.name,
+      "Je ne peux pas perdre mon temps à m'assoir sur les bancs ! Vous ne m'aurez pas, complotisateur !"
+    );
+  },
   computer() {
     gameUtilities.sendDialog(
       user.name,
@@ -258,8 +263,8 @@ const rooms = {
     DOMReference.image.src = "../img/costume-room.webp";
     DOMReference.usemap.innerHTML = `
       <map name="image-map">
-        <area target="" alt="Tenter d'ouvrir le présentoir à costume." title="Tenter d'ouvrir le présentoir à costume." href="#" id="glass" coords="533,141,1198,673" shape="rect">
-        <area target="" alt="Manipuler l'alarme" title="Manipuler l'alarme" href="#" id="alarm" coords="1202,442,1285,562" shape="rect">
+        <area target="" alt="Tenter de briser la vitre et devenir un méchant" title="Tenter de briser la vitre et devenir un méchant" href="#" id="glass" coords="533,141,1198,673" shape="rect">
+        <area target="" alt="Trafiquoter l'alarme du musée" title="Trafiquoter l'alarme du musée" href="#" id="alarm" coords="1202,442,1285,562" shape="rect">
         <area target="" alt="Aller vers le bureau" title="Aller vers le bureau" href="#" id="doorToOffice" coords="104,122,507,840" shape="rect">
         <area target="" alt="Aller vers le mur des héros" title="Aller vers le mur des héros" href="#" id="doorToGalleryRoom" coords="1242,161,1680,809" shape="rect">
       </map>
@@ -303,7 +308,7 @@ const changeRoom = {
     } else {
       gameUtilities.sendDialog(
         user.name,
-        "Il me manque la clé. Peut-être je pourrais aller parler au concierge ?"
+        "C'est fermé... Le consierge m'aiderais peut-être ?"
       );
     }
   },
@@ -347,6 +352,32 @@ DOMReference.body.addEventListener("click", (event) => {
 
     case "doorToGalleryRoom":
       changeRoom.doorToGalleryRoom();
+      break;
+    case "paintingSpiderman":
+      gameActions.paintingSpiderman();
+      break;
+    case "paintingSpicyGirls":
+      gameActions.paintingSpicyGirls();
+      break;
+    case "paintingSuperPasNet":
+      gameActions.paintingSuperPasNet();
+      break;
+    case "paintingAvainJers":
+      gameActions.paintingAvainJers();
+      break;
+    case "paintingLuckyLuc":
+      gameActions.paintingLuckyLuc();
+      break;
+    case "paintingSuperEgirl":
+      gameActions.paintingSuperEgirl();
+      break;
+    case "paintingSuper4D":
+      gameActions.paintingSuper4D();
+      break;
+    case "bench":
+      gameActions.bench();
+      break;
+
       break;
 
     case "computer":
