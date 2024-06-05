@@ -1,40 +1,33 @@
+//TODO remplacer les updateInventory par le combo
 // Fonctions fabrique pour créer des objets User et GameItem
-const createUser = () => {
-  return {
-    name: "&nbsp;",
-    enigme: "",
-    key: false,
-    code: "",
-    codeChoice: "",
-    card: false,
-    hammer: false,
-    inventory: [],
-    clean: false,
-    dress: false,
-    jacket: false,
-  };
+const user = {
+  name: "&nbsp;",
+  enigme: "",
+  key: false,
+  code: "",
+  codeChoice: "",
+  card: false,
+  hammer: false,
+  inventory: [],
+  clean: false,
+  dress: false,
+  jacket: false,
 };
-
 // Fonction fabrique pour créer les éléments du jeu.
-const createGameItem = (enigme, code, alarm, glass) => {
-  return {
-    enigme,
-    code,
-    alarm,
-    glass,
-    deactivateAlarm(inputCode) {
-      if (inputCode === this.code) {
-        this.alarm = false;
-        return true;
-      }
-      return false;
-    },
-  };
-};
+const gameItem = {
+  enigme: 6,
+  code: 2337,
+  alarm: true,
+  glass: true,
 
-// Création des instances
-const user = createUser();
-const gameItem = createGameItem(6, 2337, true, true);
+  deactivateAlarm(inputCode) {
+    if (inputCode === this.code) {
+      this.alarm = false;
+      return true;
+    }
+    return false;
+  },
+};
 
 // Module pour les références DOM
 const DOMReference = (() => {
@@ -49,6 +42,8 @@ const DOMReference = (() => {
   const dropdownMenu = document.querySelector(".dropdown-menu-content");
   const userInventory = document.querySelector("#userIventory");
   const exitButton = document.querySelector("#exitButton");
+  const dialogInventory = document.querySelector("#dialogue__inventory");
+  const inventoryContent = document.querySelector("#inventoryContent");
 
   return {
     body,
@@ -62,9 +57,51 @@ const DOMReference = (() => {
     dropdownMenu,
     userInventory,
     exitButton,
+    dialogInventory,
+    inventoryContent,
   };
 })();
 
+const inventoryTriggerCombo = (newItem) => {
+  // Function to add item to user inventory
+  const pushToUserInventory = (item) => {
+    user.inventory.push(item);
+  };
+
+  // Function to display the last item inside the inventory content div
+  const displayItemInsideDiv = () => {
+    DOMReference.inventoryContent.textContent = user.inventory.slice(-1);
+  };
+
+  // Function to update the inventory list
+  const updateInventory = () => {
+    DOMReference.userInventory.innerHTML = "";
+    user.inventory.forEach((item) => {
+      const li = document.createElement("li");
+      li.textContent = item;
+      DOMReference.userInventory.appendChild(li);
+    });
+  };
+
+  // Function to trigger the animation
+  const triggerAnimation = () => {
+    const dialogInventory = DOMReference.dialogInventory;
+    dialogInventory.classList.remove("hidden");
+    dialogInventory.classList.remove("animate");
+    void dialogInventory.offsetWidth;
+    dialogInventory.classList.add("animate");
+    setTimeout(() => {
+      dialogInventory.classList.remove("animate");
+      dialogInventory.classList.add("hidden");
+    }, 3000);
+  };
+
+  // Execute the functions
+  pushToUserInventory(newItem);
+  displayItemInsideDiv();
+  updateInventory();
+  triggerAnimation();
+};
 // Module pour la fonction utilitaire sendDialog
 const gameUtilities = (() => {
   const sendDialog = (name, str) => {
@@ -78,17 +115,6 @@ const gameUtilities = (() => {
   };
 })();
 
-const updateInventory = (dom, inventory) => {
-  dom.innerHTML = "";
-  inventory.forEach((item) => {
-    const li = document.createElement("li");
-    li.textContent = item;
-    dom.appendChild(li);
-  });
-};
-
-const pushToUserInventory = (item) => user.inventory.push(item);
-
 // Création d'objets pour encapsuler la logique du jeu
 // Stocker dans cet objet toutes les fonctions qui contiennent les scripts qui doivent être exécutés lorsqu'une zone est cliquée.
 const gameActions = {
@@ -100,8 +126,7 @@ const gameActions = {
       );
     } else if (user.enigme === gameItem.enigme) {
       user.key = true;
-      pushToUserInventory("Clé vers la salle des costumes");
-      updateInventory(DOMReference.userInventory, user.inventory);
+      inventoryTriggerCombo("Clé vers la salle des costumes");
       gameUtilities.sendDialog(
         "Concierge",
         `C'est bien ça... La réponse est "${gameItem.enigme}" pierres d'infinités. Voici la clé de la salle des costumes. Ne touchez rien s'il vous plait.`
@@ -137,8 +162,7 @@ const gameActions = {
       );
       user.code = gameItem.code;
       user.card = true;
-      pushToUserInventory(`Carte avec un code : ${gameItem.code}`);
-      updateInventory(DOMReference.userInventory, user.inventory);
+      inventoryTriggerCombo(`Carte avec un code : ${gameItem.code}`);
     }
   },
 
@@ -177,8 +201,7 @@ const gameActions = {
         "Ah ! Un marteau ! Ce n'est pas Mijolnir mais il peut être utile..."
       );
       user.hammer = true;
-      pushToUserInventory("Marteau");
-      updateInventory(DOMReference.userInventory, user.inventory);
+      inventoryTriggerCombo("Marteau");
     }
   },
 
@@ -306,6 +329,7 @@ const gameActions = {
         "Bon, à défaut de ne pas avoir de linges propres...j'en ai peut être de moins sales ?"
       );
       user.dress = true;
+      inventoryTriggerCombo("T-shirt douteux");
     }
   },
 
@@ -318,8 +342,9 @@ const gameActions = {
     } else {
       gameUtilities.sendDialog(
         user.name,
-        "Une veste propre.... Celle-ci ira, je pense."
+        "Une veste... propre ? Celle-ci ira, je pense."
       );
+      inventoryTriggerCombo("Une veste questionnable");
       user.jacket = true;
       user.dress = true;
     }
@@ -341,7 +366,7 @@ const gameActions = {
     } else {
       gameUtilities.sendDialog(
         user.name,
-        "Il faut vraiment que j'arrête les smonifères que Jessy m'a filé, ca me fait faire des nuits vraiment bizarres..."
+        "Il faut vraiment que j'arrête les somnifères que Jessy m'a filé, ca me fait faire des nuits vraiment bizarres..."
       );
     }
   },
@@ -351,8 +376,7 @@ const gameActions = {
       user.name,
       "Loading system... ./user/document/museum/password/4567... Hmmmm. Ca peut m'être utile pour désactiver l'alarme ? Je garde ça en tête."
     );
-    pushToUserInventory("Code de l'ordinateur : 4567");
-    updateInventory(DOMReference.userInventory, user.inventory);
+    inventoryTriggerCombo("Code de l'ordinateur : 4567");
   },
 
   frame() {
@@ -367,8 +391,7 @@ const gameActions = {
       user.name,
       "Pas rangée cette paperasse ! On dirait mon appartement. Non quand même pas. Tiens... Il y a un mot d'écrit : 'J'aime le poulet'... Un indice ?"
     );
-    pushToUserInventory("Document avec écrit 'J'aime le poulet");
-    updateInventory(DOMReference.userInventory, user.inventory);
+    inventoryTriggerCombo("Note : 'J'aime le poulet");
   },
 };
 
@@ -647,6 +670,11 @@ document.addEventListener("DOMContentLoaded", () => {
       const inputElement = document.getElementById("name-question");
       if (inputElement) {
         user.name = inputElement.value;
+        if (user.name.toLowerCase() === "abdou") {
+          alert("Hey ! Salut Chicken Lord !");
+        } else if (user.name.toLocaleLowerCase() === "poulet") {
+          alert("On t'a reconnu Abdou !");
+        }
         DOMReference.dialogueContainer.classList.toggle("hidden");
       }
     }

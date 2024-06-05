@@ -109,17 +109,22 @@
         />
       </map>
 
+      <div id="dialogue__inventory" class="hidden">
+        <p id="inventoryContent">Coucou</p>
+      </div>
+
       <div id="dialogue__container" class="hidden">
         <i class="bx bx-x" id="closeButton"></i>
         <p id="dialogue__name"></p>
         <p id="dialogue__content"></p>
       </div>
+
       <nav class="game__menu">
         <menu>
           <i class="bx bx-menu bx-lg dropdown-btn"></i>
           <div class="dropdown-menu-content">
             <li id="exitButton"><a href="#">Quitter le jeu</a></li>
-            <p>Inventaire</p>
+            <p class="dropdown-inventory">Inventaire</p>
             <ul id="userIventory"></ul>
           </div>
         </menu>
