@@ -1,5 +1,283 @@
 @import url("variables.css");
+@import url('https://fonts.googleapis.com/css2?family=IM+Fell+French+Canon+SC&display=swap');
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #12181F;
+}
+.flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #12181F;
+  padding: 10px 20px;
+}
+
+.logo a {
+  color: #FF0000;
+  text-decoration: none;
+  font-family: 'IM FELL French Canon SC', serif;
+  font-size: 36px;
+
+}
+.logo span{
+  color: #00AFFF;
+}
+.nav-links {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+  
+}
+
+.nav-links li {
+  margin: 0 15px;
+}
+
+.nav-links a {
+  color: #FFFFFF;
+  text-decoration: none;
+  font-family: 'IM FELL French Canon SC', serif;
+  font-size: 24px;
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #ddd;
+}
+smoke {
+  background-image: image();
+}
+/* .header {
+  width: 100%;
+  height: 500px;
+  background-color: #12181F;
+  background: url(./img/smoke.png) no-repeat center center;
+  background-size: cover;
+  mix-blend-mode: soft-light;
+} */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* .navbar {
+  flex-direction: column;
+  display: flex;
+  font-family: 'Courier New', Courier, monospace;
+  
+}
+
+.logo {
+
+position: absolute;
+width: 233px;
+height: 48px;
+left: 138px;
+top: 19px;
+
+font-family: 'IM FELL French Canon SC';
+font-style: normal;
+font-weight: 400;
+font-size: 36px;
+line-height: 42px;
+text-align: center;
+
+color: #FF0000;
+  
+}
+.nav-links {
+  position: absolute;
+width: 98px;
+height: 48px;
+left: 1011px;
+top: 29px;
+
+font-family: 'IM FELL French Canon SC';
+font-style: normal;
+font-weight: 400;
+font-size: 24px;
+line-height: 28px;
+text-align: center;
+
+color: #FFFFFF;
+}
+
+.nav-links li {
+  position: absolute;
+  width: 126px;
+  height: 48px;
+  left: 1078px;
+  top: 29px;
+  
+  font-family: 'IM FELL French Canon SC';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 28px;
+  text-align: center;
+  
+  color: #FFFFFF;
+}
+
+.nav-links a {
+  position: absolute;
+width: 174px;
+height: 48px;
+left: 1141px;
+top: 30px;
+
+font-family: 'IM FELL French Canon SC';
+font-style: normal;
+font-weight: 400;
+font-size: 24px;
+line-height: 28px;
+text-align: center;
+
+color: #FFFFFF;
+}
+
+.nav-links a:hover {
+  position: absolute;
+  width: 111px;
+  height: 48px;
+  left: 1264px;
+  top: 31px;
+  
+  font-family: 'IM FELL French Canon SC';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 28px;
+  text-align: center;
+  
+  color: #FFFFFF;
+}
 .header {
+  position: absolute;
+  width: 1913px;
+  height: 1080px;
+  left: -433px;
+  top: 5px;
+  background-color: navy;
+  
+  background: url(./img/Smoke.png);
+  mix-blend-mode: soft-light;
+  } */
+
+
+
+
+
+/* .home {
+
+position: absolute;
+width: 98px;
+height: 48px;
+left: 1011px;
+top: 29px;
+
+font-family: 'IM FELL French Canon SC';
+font-style: normal;
+font-weight: 400;
+font-size: 24px;
+line-height: 28px;
+text-align: center;
+
+color: #FFFFFF;
+}
+
+.about {
+
+  position: absolute;
+  width: 126px;
+  height: 48px;
+  left: 1078px;
+  top: 29px;
+  
+  font-family: 'IM FELL French Canon SC';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 28px;
+  text-align: center;
+  
+  color: #FFFFFF;
+  }
+
+.games {
+
+position: absolute;
+width: 174px;
+height: 48px;
+left: 1141px;
+top: 30px;
+
+font-family: 'IM FELL French Canon SC';
+font-style: normal;
+font-weight: 400;
+font-size: 24px;
+line-height: 28px;
+text-align: center;
+
+color: #FFFFFF;
+}
+
+.contact {
+
+  position: absolute;
+  width: 111px;
+  height: 48px;
+  left: 1264px;
+  top: 31px;
+  
+  font-family: 'IM FELL French Canon SC';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 28px;
+  text-align: center;
+  
+  color: #FFFFFF;
+  } */
+
+/* .title{
+  display: flex;
+  font-family: 'Courier New', Courier, monospace;
+  flex-direction: row;
+} */
+
+/* .header {
   position: relative;
   height: 40vh;
 
@@ -75,4 +353,4 @@
     width: 23px;
     margin-right: 10px;
   }
-}
+} */
