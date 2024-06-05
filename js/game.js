@@ -8,7 +8,7 @@ const createUser = () => {
     codeChoice: "",
     card: false,
     hammer: false,
-    own: false,
+    clean: false,
     dress: false,
     jacket: false,
   };
@@ -258,7 +258,7 @@ const gameActions = {
     );
   },
   sink() {
-    if (user.own) {
+    if (user.clean) {
       gameUtilities.sendDialog(
         user.name,
         "Je me suis déjà mis un coup d'eau... Je tourne en rond."
@@ -268,7 +268,7 @@ const gameActions = {
         user.name,
         "Petite toilette qui va faire du bien ♪"
       );
-      user.own = true;
+      user.clean = true;
     }
   },
   laundry() {
@@ -297,6 +297,7 @@ const gameActions = {
         "Une veste propre.... Celle ci ira, je pense"
       );
       user.jacket = true;
+      user.dress = true;
     }
   },
   wc() {
@@ -460,12 +461,12 @@ const changeRoom = {
     rooms.officeRoom();
   },
   doorToLobbyRoom() {
-    if (user.name !== "&nbsp;" && user.own && user.dress) {
+    if (user.name !== "&nbsp;" && user.clean && user.dress) {
       rooms.lobbyRoom();
     } else {
       gameUtilities.sendDialog(
         user.name,
-        "Où est-ce que je vais ? Je ne peux pas partir dans cet état !"
+        "Je ne vais pas partir comme ça... Il faut que je me lave le visage, que je me regarde dans le miroir et que j'enfile quelque chose."
       );
     }
   },
