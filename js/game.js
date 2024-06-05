@@ -1,7 +1,7 @@
 // Fonctions fabrique pour créer des objets User et GameItem
 const createUser = () => {
   return {
-    name:"Joueur",
+    name: "&nbsp;",
     enigme: "",
     key: true,
     code: "",
@@ -11,7 +11,6 @@ const createUser = () => {
     own: false,
     dress: false,
     jacket: false,
-    
   };
 };
 
@@ -241,74 +240,87 @@ const gameActions = {
     );
   },
   bed() {
-    gameUtilities.sendDialog(user.name,
+    gameUtilities.sendDialog(
+      user.name,
       `J'aurais tord de ne pas profiter de cette langueur pour faire une grâce mat', pionssé, ou secouer cette feignasse... Allez debout ${user.name}`
     );
   },
   window() {
-    gameUtilities.sendDialog(user.name,
+    gameUtilities.sendDialog(
+      user.name,
       "Un beau dimanche qui s'annonce, personne dans les rues, encore moins au musée..."
     );
   },
   ground() {
-    gameUtilities.sendDialog(user.name,
+    gameUtilities.sendDialog(
+      user.name,
       "Aaaaarg... C'est d'un bazard sans nom... Je le jure, je rangerais... La semaine prochaine ?"
     );
   },
-  sink(user) {
+  sink() {
     if (user.own) {
       gameUtilities.sendDialog(
         user.name,
         "Je me suis déjà mis un coup d'eau... Je tourne en rond."
       );
     } else {
-      gameUtilities.sendDialog(user.name,
+      gameUtilities.sendDialog(
+        user.name,
         "Petite toilette qui va faire du bien ♪"
       );
       user.own = true;
     }
   },
-
-  laundry(user) {
+  laundry() {
     if (user.dress) {
       gameUtilities.sendDialog(
         user.name,
         "Je ne pourrais pas trouver de vêtement moins sale que ceux que j'ai sur moi... Malheureusement.."
       );
     } else {
-      gameUtilities.sendDialog(user.name,
+      gameUtilities.sendDialog(
+        user.name,
         "Bon, à défaut de ne pas avoir de linge propre...j'en ai peut être de moins sale ?"
       );
       user.dress = true;
     }
   },
-
-  wardrobe(user) {
+  wardrobe() {
     if (user.jacket) {
-      gameUtilities.sendDialog(user.name,
+      gameUtilities.sendDialog(
+        user.name,
         "Peut-être que j'ai d'autres vestes moins froissée ? Peut-être celle...CI !...Ha, elle à des trous..."
       );
     } else {
-      gameUtilities.sendDialog(user.name,
-        "Une veste propre.... Celle ci ira, Berk... une coulante de pigeon sechée sur l'épaule...Comment j'ai pu ne pas voir ça ?!"
+      gameUtilities.sendDialog(
+        user.name,
+        "Une veste propre.... Celle ci ira, je pense"
       );
       user.jacket = true;
     }
   },
-
   wc() {
-    gameUtilities.sendDialog(user.name,
+    gameUtilities.sendDialog(
+      user.name,
       "J'espère que les syndicats feront vite pour faire déboucher la colonne des toilettes..."
     );
   },
-
   mirror() {
-    gameUtilities.sendDialog(user.name,
-      `L'alarme est connectée à la vitrine. Si j'ouvre la vitrine sans la désactiver je de rencontrer Batman dans de mauvaise circonstance.
+    if (user.name === "&nbsp;") {
+      gameUtilities.sendDialog(
+        user.name,
+        `Mon rêve cette est était tellement étrannge que j'en ai oublier mon nom...Comment je m'appelle déjà ?
     <input id="name-question" type="text">
     <button id="submit-name">Je m'appelle comme ça !</button>`
-    )
-  }
+      );
+    } else {
+      gameUtilities.sendDialog(
+        user.name,
+        "Il faut vraiment que j'arrête ces somnifer que m'a passé Jessy, ca me fait faire des nuits vraiment bizarre..."
+      );
+    }
+  },
+
   computer() {
     gameUtilities.sendDialog(
       user.name,
@@ -411,8 +423,9 @@ const rooms = {
           shape="poly"
           id="doorToToilets"
         />
-      </map>`
-  }
+      </map>`;
+  },
+
   officeRoom() {
     DOMReference.image.src = "../img/office2.webp";
     DOMReference.usemap.innerHTML = `
@@ -445,6 +458,16 @@ const changeRoom = {
 
   doorToOffice() {
     rooms.officeRoom();
+  },
+  doorToLobbyRoom() {
+    if (user.name !== "&nbsp;" && user.own && user.dress) {
+      rooms.lobbyRoom();
+    } else {
+      gameUtilities.sendDialog(
+        user.name,
+        "Où est-ce que je vais ? Je ne peux pas partir dans cet état !"
+      );
+    }
   },
 };
 
@@ -533,6 +556,38 @@ DOMReference.body.addEventListener("click", (event) => {
 
     case "doorToOffice":
       changeRoom.doorToOffice();
+      break;
+
+    case "bed":
+      gameActions.bed();
+      break;
+
+    case "wc":
+      gameActions.wc();
+      break;
+
+    case "sink":
+      gameActions.sink();
+      break;
+
+    case "doorToLobbyRoom":
+      changeRoom.doorToLobbyRoom();
+      break;
+
+    case "laundry":
+      gameActions.laundry();
+      break;
+
+    case "wardrobe":
+      gameActions.wardrobe();
+      break;
+
+    case "window":
+      gameActions.window();
+      break;
+
+    case "ground":
+      gameActions.ground();
       break;
   }
 });
