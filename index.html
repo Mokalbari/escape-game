@@ -9,7 +9,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Acme&family=Bangers&family=Walter+Turncoat&display=swap"
+      href="https://fonts.googleapis.com/css2?family=IM+Fell+French+Canon+SC&family=IM+Fell+French+Canon:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
       rel="stylesheet"
     />
     <script src="./js/script.js" defer></script>
@@ -17,14 +21,12 @@
   <body>
     <header class="container">
       <nav class="navigation flex-row">
-        <div class="logo uppercase">
-          Hero'<span class="logo--acent">Scape</span>
-        </div>
+        <div class="logo">Hero'<span class="logo--acent">Scape</span></div>
         <menu class="navigation__menu flex-row">
-          <li><a href="#">Home</a></li>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Games</a></li>
-          <li><a href="#">Contact</a></li>
+          <li class="link"><a href="#">Home</a></li>
+          <li class="link"><a href="#">About</a></li>
+          <li class="link"><a href="#">Games</a></li>
+          <li class="link"><a href="#">Contact</a></li>
         </menu>
       </nav>
     </header>
@@ -32,25 +34,28 @@
     <main>
       <section class="container flex-row hero">
         <div class="hero__container flex-column">
-          <h1 class="hero__title uppercase">Bienvenue sur Hero'Scape</h1>
+          <h1 class="hero__title">Bienvenue sur Hero'Scape</h1>
           <img
             src="./img/Line 8.png"
             alt="Ligne séparatrice"
             class="hero__separator"
           />
           <p class="hero__content">
-            Votre nouvelle destination pour des jeux captivants sur les
-            super-héros.
+            Plongez dans un monde où chaque porte mène à une nouvelle énigme,
+            chaque indice vous rapproche de la liberté, et chaque seconde
+            compte.
           </p>
           <p class="hero__content">
-            Plongez dans un univers où vous incarnez des héros légendaires,
-            relevez des défis épiques et découvrez des aventures inédites.
+            Chez Hero'scape, nous transformons l'ordinaire en
+            extraordinaire avec des scénarios palpitants et immersifs qui
+            mettront à l'épreuve votre esprit, votre ingéniosité et votre esprit
+            d'équipe.
           </p>
           <p class="hero__content">
             Préparez-vous à vivre l'expérience ultime des super-héros,
             exclusivement sur Hero'scape!
           </p>
-          <a href="#" class="cta">Commencez l'Aventure !</a>
+          <a href="./html/game.html" class="cta">Commencez l'Aventure !</a>
         </div>
         <img
           src="./img/hero_main_img.png"
@@ -58,6 +63,75 @@
           class="hero__image"
         />
       </section>
+
+      <section class="games container">
+        <div class="games__container">
+          <div class="games__game flex-column">
+            <img src="./img/avatar1.png" alt="Avatar" class="games__avatar" />
+            <h2 class="games__title">House Hell</h2>
+            <img
+              src="./img/bedroom.webp"
+              alt="Chambre du jeu house hell"
+              class="games__image"
+            />
+            <p class="games__content">
+              La soirée la plus attendue de l'année approche : le grand bal des
+              super-héros. Pour y assister incognito et éblouir tout le monde,
+              vous avez besoin du costume légendaire de l'invincible Captain
+              Amerloque.
+            </p>
+            <a href="./html/game.html" class=" games__button"
+              ><i class=' bx-lg bx bx-play-circle' ></i></i
+            ></a>
+          </div>
+        </div>
+
+        <div class="games__container">
+          <div class="games__game flex-column">
+            <img src="./img/avatar2.png" alt="Avatar" class="games__avatar" />
+            <h2 class="games__title">House Hell</h2>
+            <img
+              src="./img/park.webp"
+              alt="Chambre du jeu house hell"
+              class="games__image"
+            />
+            <p class="games__content">
+              Le monde tel que vous le connaissiez a disparu. Une épidémie
+              dévastatrice a transformé la majorité de la population en zombies
+              affamés. Vous êtes réfugiés dans une jungle, luttant chaque jour pour votre survie.
+            </p>
+            <a href="#" class=" games__button"
+              ><i class=' bx-lg bx bx-play-circle' ></i></i
+            ></a>
+          </div>
+        </div>
+
+        <div class="games__container">
+          <div class="games__game flex-column">
+            <img src="./img/avatar3.png" alt="Avatar" class="games__avatar" />
+            <h2 class="games__title">House Hell</h2>
+            <img
+              src="./img/manor.webp"
+              alt="Chambre du jeu house hell"
+              class="games__image"
+            />
+            <p class="games__content">
+              Le célèbre manoir Blackwood a été le théâtre d'un crime odieux. Le
+              riche propriétaire, Lord Blackwood, a été retrouvé mort dans son
+              bureau, et les circonstances de sa mort sont des plus mystérieuses.
+            </p>
+            <a href="#" class="games__button"
+              ><i class=' bx-lg bx bx-play-circle' ></i></i
+            ></a>
+          </div>
+        </div>
+      </section>
     </main>
+
+    <footer class="container footer">
+      <p>Made with ♡ by : Antony, Sylvain, Alex, Florent, Romain, Medhi, Rémi</p>
+      <p>Sur un design original  Abdou Kerkeb. Merci.
+      </p>
+    </footer>
   </body>
 </html>
