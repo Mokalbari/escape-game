@@ -1,39 +1,33 @@
+//TODO remplacer les updateInventory par le combo
 // Fonctions fabrique pour créer des objets User et GameItem
-const createUser = () => {
-  return {
-    name:"&nbsp;",
-    enigme: "",
-    key: true,
-    code: "",
-    codeChoice: "",
-    card: false,
-    hammer: false,
-    own: false,
-    dress: false,
-    jacket: false,
-    
-  };
+const user = {
+  name: "&nbsp;",
+  enigme: "",
+  key: false,
+  code: "",
+  codeChoice: "",
+  card: false,
+  hammer: false,
+  inventory: [],
+  clean: false,
+  dress: false,
+  jacket: false,
 };
+// Fonction fabrique pour créer les éléments du jeu.
+const gameItem = {
+  enigme: 6,
+  code: 2337,
+  alarm: true,
+  glass: true,
 
-const createGameItem = (enigme, code, alarm, glass) => {
-  return {
-    enigme,
-    code,
-    alarm,
-    glass,
-    deactivateAlarm(inputCode) {
-      if (inputCode === this.code) {
-        this.alarm = false;
-        return true;
-      }
-      return false;
-    },
-  };
+  deactivateAlarm(inputCode) {
+    if (inputCode === this.code) {
+      this.alarm = false;
+      return true;
+    }
+    return false;
+  },
 };
-
-// Création des instances
-const user = createUser();
-const gameItem = createGameItem("poulet", 2337, true, true);
 
 // Module pour les références DOM
 const DOMReference = (() => {
@@ -46,6 +40,10 @@ const DOMReference = (() => {
   const closeButton = document.querySelector("#closeButton");
   const dropdownBtn = document.querySelector(".dropdown-btn");
   const dropdownMenu = document.querySelector(".dropdown-menu-content");
+  const userInventory = document.querySelector("#userIventory");
+  const exitButton = document.querySelector("#exitButton");
+  const dialogInventory = document.querySelector("#dialogue__inventory");
+  const inventoryContent = document.querySelector("#inventoryContent");
 
   return {
     body,
@@ -57,10 +55,54 @@ const DOMReference = (() => {
     closeButton,
     dropdownBtn,
     dropdownMenu,
+    userInventory,
+    exitButton,
+    dialogInventory,
+    inventoryContent,
   };
 })();
 
-// Module pour les fonctions utilitaires
+const inventoryTriggerCombo = (newItem) => {
+  // Function to add item to user inventory
+  const pushToUserInventory = (item) => {
+    user.inventory.push(item);
+  };
+
+  // Function to display the last item inside the inventory content div
+  const displayItemInsideDiv = () => {
+    DOMReference.inventoryContent.textContent = user.inventory.slice(-1);
+  };
+
+  // Function to update the inventory list
+  const updateInventory = () => {
+    DOMReference.userInventory.innerHTML = "";
+    user.inventory.forEach((item) => {
+      const li = document.createElement("li");
+      li.textContent = item;
+      DOMReference.userInventory.appendChild(li);
+    });
+  };
+
+  // Function to trigger the animation
+  const triggerAnimation = () => {
+    const dialogInventory = DOMReference.dialogInventory;
+    dialogInventory.classList.remove("hidden");
+    dialogInventory.classList.remove("animate");
+    void dialogInventory.offsetWidth;
+    dialogInventory.classList.add("animate");
+    setTimeout(() => {
+      dialogInventory.classList.remove("animate");
+      dialogInventory.classList.add("hidden");
+    }, 3000);
+  };
+
+  // Execute the functions
+  pushToUserInventory(newItem);
+  displayItemInsideDiv();
+  updateInventory();
+  triggerAnimation();
+};
+// Module pour la fonction utilitaire sendDialog
 const gameUtilities = (() => {
   const sendDialog = (name, str) => {
     DOMReference.dialogueContainer.classList.toggle("hidden");
@@ -68,34 +110,33 @@ const gameUtilities = (() => {
     DOMReference.dialogueContent.innerHTML = str;
   };
 
-  const toLowerCase = (str) => str.toLowerCase();
-
   return {
     sendDialog,
-    toLowerCase,
   };
 })();
 
 // Création d'objets pour encapsuler la logique du jeu
+// Stocker dans cet objet toutes les fonctions qui contiennent les scripts qui doivent être exécutés lorsqu'une zone est cliquée.
 const gameActions = {
   enigme(user, gameItem) {
     if (user.key) {
       gameUtilities.sendDialog(
         user.name,
-        `J'ai déjà répondu à l'énigme ! L'animal favori d'Abdou est le ${user.enigme}. Je peux me diriger vers la porte.`
+        `J'ai déjà répondu à l'énigme ! Il éxiste ${user.enigme} pierres d'infinités. Je peux me diriger vers la salle des costumes.`
       );
-    } else if (gameUtilities.toLowerCase(user.enigme) === "poulet") {
+    } else if (user.enigme === gameItem.enigme) {
       user.key = true;
+      inventoryTriggerCombo("Clé vers la salle des costumes");
       gameUtilities.sendDialog(
         "Concierge",
-        `C'est bien ça... La réponse est "${gameItem.enigme}". Voici la clé de la salle des costumes. Ne touchez rien s'il vous plait.`
+        `C'est bien ça... La réponse est "${gameItem.enigme}" pierres d'infinités. Voici la clé de la salle des costumes. Ne touchez rien s'il vous plait.`
       );
     } else {
       if (!user.enigme) {
         gameUtilities.sendDialog(
           "Concierge",
-          `Pour pouvoir accéder à la salle des costumes, vous devez répondre à une question ; <br />Quel est l'animal favori d'Abdou ?
-          <input id="animal-question" type="text">
+          `Pour pouvoir accéder à la salle des costumes, vous devez répondre à une question ; <br />Combien existe-t-il de pierres d'infinités ?
+          <input id="pierre-question" type="text">
           <button id="submit-enigme">Envoyer</button>`
         );
       } else {
@@ -117,10 +158,11 @@ const gameActions = {
     } else {
       gameUtilities.sendDialog(
         user.name,
-        "Ah ! Une carte ! Je vais noter le code."
+        `Je vais fouiller ces tiroirs. Une carte ! Le code marqué est ${gameItem.code}`
       );
-      user.code = value;
+      user.code = gameItem.code;
       user.card = true;
+      inventoryTriggerCombo(`Carte avec un code : ${gameItem.code}`);
     }
   },
 
@@ -132,7 +174,7 @@ const gameActions = {
     if (gameItem.alarm && !user.codeChoice) {
       gameUtilities.sendDialog(
         user.name,
-        `L'alarme est connectée à la vitrine. Si j'ouvre la vitrine sans la désactiver je de rencontrer Batman dans de mauvaise circonstance.
+        `L'alarme est connectée à la vitrine. Si j'ouvre la vitrine sans la désactiver je risque de rencontrer Batman dans de mauvaises circonstances.
     <input id="alarm-question" type="text">
     <button id="submit-alarm">Tester le code</button>`
       );
@@ -151,14 +193,15 @@ const gameActions = {
     if (user.hammer) {
       gameUtilities.sendDialog(
         user.name,
-        "Bon je sais toujours ou est le marteau, je suis pas encore amnesique."
+        "Bon je sais toujours où est le marteau, je n'suis pas encore amnésique."
       );
     } else {
       gameUtilities.sendDialog(
         user.name,
-        "Ah ! Un marteau ! Ce n'est pas Mijolnir, mais il peut être utile..."
+        "Ah ! Un marteau ! Ce n'est pas Mijolnir mais il peut être utile..."
       );
       user.hammer = true;
+      inventoryTriggerCombo("Marteau");
     }
   },
 
@@ -166,145 +209,193 @@ const gameActions = {
     if (user.hammer && !gameItem.alarm) {
       gameUtilities.sendDialog(
         user.name,
-        "A-larme désactivééé ♪! Cassons cette vitre telle un grand méchant et filon en douce !"
+        "Tra-vail terminééé ♪! Cassons cette vitre tel un grand méchant et filons en douce !"
       );
     } else if (!user.hammer && gameItem.alarm) {
       gameUtilities.sendDialog(
         user.name,
-        "Si je pouvais récupérer le costume de Captain Amerloque, je serais certainement le héro de cette soirée !"
+        "Si je pouvais récupérer le costume de Captain Amerloque, je serais certainement le héros de cette soirée !"
       );
     } else if (user.hammer && gameItem.alarm) {
       gameUtilities.sendDialog(
         user.name,
-        "Si je casse la vitre avec l'alarme activé, je vais finir en zonzon entre le Pinguoin et Double-Face..."
+        "Si je casse la vitre avec l'alarme encore activée, je vais finir en zonzon entre le Pinguoin et Double-Face..."
       );
     } else if (!user.hammer && !gameItem.alarm) {
       gameUtilities.sendDialog(
         user.name,
-        "Tra-vail terminééé ♪ ! Il faut maintenant le moyen d'ouvrir la porte."
+        "A-larme désactivée ♪ ! Il faut maintenant trouver le moyen d'ouvrir la porte."
       );
     }
   },
 
   paintingSpiderman() {
-    gameUtilities.sendDialog(user.name,
+    gameUtilities.sendDialog(
+      user.name,
       "Notre bon Spider-Man, beaucoup trop musclé pour ce qu'il est..."
     );
   },
 
   paintingSpicyGirls() {
-    gameUtilities.sendDialog(user.name,
-      "Elles étais pas 3 à un moment ? Ou mes yeux me joue des tours ?"
+    gameUtilities.sendDialog(
+      user.name,
+      "Elles étaient pas 3 à un moment ? Ou mes yeux me jouent des tours ?"
     );
   },
 
   paintingSuperPasNet() {
-    gameUtilities.sendDialog(user.name,
-      "Super pas-net, le seul super héro qu'on ne peux pas voir correctement, il est peut-être pas beau ?"
+    gameUtilities.sendDialog(
+      user.name,
+      "Super pas-net, le seul super héro qu'on ne peut pas voir correctement, il est peut-être pas beau ?"
     );
   },
 
   paintingAvainJers() {
-    gameUtilities.sendDialog(user.name,
-      "Mes préferé ! Les Avain-Jers, merci Diswen pour ce cadeau !"
+    gameUtilities.sendDialog(
+      user.name,
+      "Mes préferés ! Les Avain-Jers, merci Diswen pour ce cadeau !"
     );
   },
 
   paintingLuckyLuc() {
-    gameUtilities.sendDialog(user.name,
+    gameUtilities.sendDialog(
+      user.name,
       "Lucky Luc ? Mais ?! Qu'est ce qu'il fiche ici ?!"
     );
   },
 
   paintingSuperEgirl() {
-    gameUtilities.sendDialog(user.name,
-      "J'ai jamais pu entendre son super 'Eeeeh' qui fait la renomée de Super E-Girl"
+    gameUtilities.sendDialog(
+      user.name,
+      "J'ai jamais pu entendre son super 'Eeeeh' qui fait la renommée de Super E-Girl"
     );
   },
 
   paintingSuper4D() {
-    gameUtilities.sendDialog(user.name,
-      "Il parrait que Super4D détiens ses pouvoirs de ces 25 personnalitées, ils prennents tant de place que Super4D peut passer les dimentions !"
+    gameUtilities.sendDialog(
+      user.name,
+      "Il paraît les pouvoirs de Super4D vienennt de ses 25 personnalitées ; elles prennent tant de place que Super4D peut passer les dimentions !"
     );
   },
+
   bench() {
-    gameUtilities.sendDialog(user.name,
-      "Je ne peux pas perdre mon temps à m'assoir sur les bancs ! Vous ne m'aurez pas, complotisateur !"
+    gameUtilities.sendDialog(
+      user.name,
+      "Je ne peux pas perdre mon temps à m'assoir sur les bancs ! Vous ne m'aurez pas, complotisateurs !"
     );
   },
   bed() {
-    gameUtilities.sendDialog(user.name,
-      `J'aurais tord de ne pas profiter de cette langueur pour faire une grâce mat', pionssé, ou secouer cette feignasse... Allez debout ${user.name}`
+    gameUtilities.sendDialog(
+      user.name,
+      `Ce serait dommage ne pas profiter de cette langueur pour faire une grâce mat', pioncer, ou secouer cette feignasse... Allez debout ${user.name} !`
     );
   },
   window() {
-    gameUtilities.sendDialog(user.name,
+    gameUtilities.sendDialog(
+      user.name,
       "Un beau dimanche qui s'annonce, personne dans les rues, encore moins au musée..."
     );
   },
   ground() {
-    gameUtilities.sendDialog(user.name,
-      "Aaaaarg... C'est d'un bazard sans nom... Je le jure, je rangerais... La semaine prochaine ?"
+    gameUtilities.sendDialog(
+      user.name,
+      "Aaaaarg... C'est d'un bazar sans nom... Je le jure, je rangerai... La semaine prochaine ?"
     );
   },
   sink() {
-    if (user.own) {
+    if (user.clean) {
       gameUtilities.sendDialog(
         user.name,
         "Je me suis déjà mis un coup d'eau... Je tourne en rond."
       );
     } else {
-      gameUtilities.sendDialog(user.name,
+      gameUtilities.sendDialog(
+        user.name,
         "Petite toilette qui va faire du bien ♪"
       );
-      user.own = true;
+      user.clean = true;
     }
   },
+
   laundry() {
     if (user.dress) {
       gameUtilities.sendDialog(
         user.name,
-        "Je ne pourrais pas trouver de vêtement moins sale que ceux que j'ai sur moi... Malheureusement.."
+        "Je ne pourrais pas trouver de vêtements moins sales que ceux que j'ai sur moi... Malheureusement..."
       );
     } else {
-      gameUtilities.sendDialog(user.name,
-        "Bon, à défaut de ne pas avoir de linge propre...j'en ai peut être de moins sale ?"
+      gameUtilities.sendDialog(
+        user.name,
+        "Bon, à défaut de ne pas avoir de linges propres...j'en ai peut être de moins sales ?"
       );
+      user.dress = true;
+      inventoryTriggerCombo("T-shirt douteux");
+    }
+  },
+
+  wardrobe() {
+    if (user.jacket) {
+      gameUtilities.sendDialog(
+        user.name,
+        "Peut-être que j'ai d'autres vestes moins froissées ? Peut-être celle...CI !...Ha, elle à des trous..."
+      );
+    } else {
+      gameUtilities.sendDialog(
+        user.name,
+        "Une veste... propre ? Celle-ci ira, je pense."
+      );
+      inventoryTriggerCombo("Une veste questionnable");
+      user.jacket = true;
       user.dress = true;
     }
   },
-  wardrobe() {
-    if (user.jacket) {
-      gameUtilities.sendDialog(user.name,
-        "Peut-être que j'ai d'autres vestes moins froissée ? Peut-être celle...CI !...Ha, elle à des trous..."
-      );
-    } else {
-      gameUtilities.sendDialog(user.name,
-        "Une veste propre.... Celle ci ira, je pense"
-      );
-      user.jacket = true;
-    }
-  },
   wc() {
-    gameUtilities.sendDialog(user.name,
+    gameUtilities.sendDialog(
+      user.name,
       "J'espère que les syndicats feront vite pour faire déboucher la colonne des toilettes..."
     );
   },
   mirror() {
-    if (user.name ==="&nbsp;") {
-    gameUtilities.sendDialog(user.name,
-      `Mon rêve cette est était tellement étrannge que j'en ai oublier mon nom...Comment je m'appelle déjà ?
+    if (user.name === "&nbsp;") {
+      gameUtilities.sendDialog(
+        user.name,
+        `Mon rêve cette est était tellement étrange que j'en ai oublier mon nom... Comment je m'appelle déjà ?
     <input id="name-question" type="text">
-    <button id="submit-name">Je m'appelle comme ça !</button>`
-    )
-  } else {
-    gameUtilities.sendDialog(user.name,
-      "Il faut vraiment que j'arrête ces somnifer que m'a passé Jessy, ca me fait faire des nuits vraiment bizarre..."
+    <button id="submit-name">Ah oui ! Je m'appelle comme ça !</button>`
+      );
+    } else {
+      gameUtilities.sendDialog(
+        user.name,
+        "Il faut vraiment que j'arrête les somnifères que Jessy m'a filé, ca me fait faire des nuits vraiment bizarres..."
+      );
+    }
+  },
+
+  computer() {
+    gameUtilities.sendDialog(
+      user.name,
+      "Loading system... ./user/document/museum/password/4567... Hmmmm. Ca peut m'être utile pour désactiver l'alarme ? Je garde ça en tête."
     );
-  }
+    inventoryTriggerCombo("Code de l'ordinateur : 4567");
+  },
+
+  frame() {
+    gameUtilities.sendDialog(
+      user.name,
+      "Ce cadre est exeptionnel, que cache t'il ? Hmmmm. Rien."
+    );
+  },
+
+  drawers() {
+    gameUtilities.sendDialog(
+      user.name,
+      "Pas rangée cette paperasse ! On dirait mon appartement. Non quand même pas. Tiens... Il y a un mot d'écrit : 'J'aime le poulet'... Un indice ?"
+    );
+    inventoryTriggerCombo("Note : 'J'aime le poulet");
   },
 };
 
+// Map area des différentes salles navigables chargées dynamiquement en fonction des clicks
 const rooms = {
   costumeRoom() {
     DOMReference.image.src = "../img/costume-room.webp";
@@ -312,7 +403,7 @@ const rooms = {
       <map name="image-map">
         <area target="" alt="Tenter de briser la vitre et devenir un méchant" title="Tenter de briser la vitre et devenir un méchant" href="#" id="glass" coords="533,141,1198,673" shape="rect">
         <area target="" alt="Trafiquoter l'alarme du musée" title="Trafiquoter l'alarme du musée" href="#" id="alarm" coords="1202,442,1285,562" shape="rect">
-        <area target="" alt="Aller vers une pièce (gauche)" title="Aller vers une pièce (gauche)" href="#" id="doorToLeft" coords="104,122,507,840" shape="rect">
+        <area target="" alt="Aller vers le bureau" title="Aller vers le bureau" href="#" id="doorToOffice" coords="104,122,507,840" shape="rect">
         <area target="" alt="Aller vers le mur des héros" title="Aller vers le mur des héros" href="#" id="doorToGalleryRoom" coords="1242,161,1680,809" shape="rect">
       </map>
     `;
@@ -384,10 +475,23 @@ const rooms = {
           shape="poly"
           id="doorToToilets"
         />
-      </map>`
+      </map>`;
+  },
+
+  officeRoom() {
+    DOMReference.image.src = "../img/office2.webp";
+    DOMReference.usemap.innerHTML = `
+    <map name="image-map">
+      <area id="computer" target="" alt="ordinateur" title="Allumer l'ordinateur" href="#" coords="1222,433,1036,601" shape="rect">
+      <area id="card" target="" alt="range-documents" title="Ouvrir le range-documents" href="#" coords="1240,513,1365,634" shape="rect">
+      <area id="drawers" target="" alt="tiroirs " title="Ouvrir les tiroirs " href="#" coords="950,639,1141,954" shape="rect">
+      <area id="frame" target="" alt="grand cadre" title="Cliquez sur le grand cadre" href="#" coords="1073,151,1315,428" shape="rect">
+     <area id="doorToCostumeRoom" target="" alt="Ouvrir la porte du bureau" title="porte du bureau" href="#" coords="361,780,708,136" shape="rect">
+    </map>`;
   },
 };
 
+// Objet qui stocke les fonctions qui invoquent les fonctions de rooms.
 const changeRoom = {
   doorToCostumeRoom(user) {
     if (user.key) {
@@ -395,20 +499,26 @@ const changeRoom = {
     } else {
       gameUtilities.sendDialog(
         user.name,
-        "C'est fermé... Le consierge m'aiderais peut-être ?"
+        "C'est fermé... Le concierge m'aiderait peut-être ?"
       );
     }
   },
 
   doorToGalleryRoom() {
-    rooms.galleryRoom()
+    rooms.galleryRoom();
   },
+
+  doorToOffice() {
+    rooms.officeRoom();
+  },
+
   doorToLobbyRoom() {
-    if (user.name !== "&nbsp;" && user.own && user.dress) {
-      rooms.lobbyRoom()
+    if (user.name !== "&nbsp;" && user.clean && user.dress) {
+      rooms.lobbyRoom();
     } else {
-      gameUtilities.sendDialog(user.name,
-        "Où est-ce que je vais ? Je ne peux pas partir dans cet état !"
+      gameUtilities.sendDialog(
+        user.name,
+        "Je ne vais pas partir comme ça... Il faut que je me lave le visage, que je me regarde dans le miroir et que j'enfile quelque chose."
       );
     }
   },
@@ -421,86 +531,130 @@ DOMReference.body.addEventListener("click", (event) => {
     case "enigme":
       gameActions.enigme(user, gameItem);
       break;
+
     case "doorToCostumeRoom":
       changeRoom.doorToCostumeRoom(user);
       break;
+
     case "hammer":
       gameActions.hammer(user);
       break;
+
     case "glass":
       gameActions.glass(user, gameItem);
       break;
+
     case "alarm":
       gameActions.alarm(user, gameItem);
       break;
+
     case "closeButton":
       DOMReference.dialogueContainer.classList.toggle("hidden");
       break;
+
     case "doorToGalleryRoom":
       changeRoom.doorToGalleryRoom();
       break;
+
     case "paintingSpiderman":
       gameActions.paintingSpiderman();
       break;
+
     case "paintingSpicyGirls":
       gameActions.paintingSpicyGirls();
       break;
+
     case "paintingSuperPasNet":
       gameActions.paintingSuperPasNet();
       break;
+
     case "paintingAvainJers":
       gameActions.paintingAvainJers();
       break;
+
     case "paintingLuckyLuc":
       gameActions.paintingLuckyLuc();
       break;
+
     case "paintingSuperEgirl":
       gameActions.paintingSuperEgirl();
       break;
+
     case "paintingSuper4D":
       gameActions.paintingSuper4D();
       break;
+
     case "bench":
       gameActions.bench();
       break;
     case "mirror":
       gameActions.mirror();
       break;
+
+    case "card":
+      gameActions.card(user, gameItem);
+      break;
+
+    case "computer":
+      gameActions.computer();
+      break;
+
+    case "frame":
+      gameActions.frame();
+      break;
+
+    case "drawers":
+      gameActions.drawers();
+      break;
+
+    case "doorToOffice":
+      changeRoom.doorToOffice();
+      break;
+
     case "bed":
       gameActions.bed();
-      break; 
+      break;
+
     case "wc":
       gameActions.wc();
       break;
+
     case "sink":
       gameActions.sink();
       break;
+
     case "doorToLobbyRoom":
       changeRoom.doorToLobbyRoom();
       break;
+
     case "laundry":
       gameActions.laundry();
       break;
+
     case "wardrobe":
       gameActions.wardrobe();
       break;
+
     case "window":
       gameActions.window();
       break;
+
     case "ground":
       gameActions.ground();
       break;
   }
 });
 
+// Gestion des événements sur le formulaire
 document.addEventListener("DOMContentLoaded", () => {
   const parentElement = document.body;
 
   parentElement.addEventListener("click", (event) => {
     if (event.target && event.target.id === "submit-enigme") {
-      const inputElement = document.getElementById("animal-question");
+      const inputElement = document.getElementById("pierre-question");
       if (inputElement) {
-        user.enigme = inputElement.value;
+        user.enigme = +inputElement.value;
+        console.log(user.enigme);
         DOMReference.dialogueContainer.classList.toggle("hidden");
       }
     } else if (event.target && event.target.id === "submit-alarm") {
@@ -516,6 +670,11 @@ document.addEventListener("DOMContentLoaded", () => {
       const inputElement = document.getElementById("name-question");
       if (inputElement) {
         user.name = inputElement.value;
+        if (user.name.toLowerCase() === "abdou") {
+          alert("Hey ! Salut Chicken Lord !");
+        } else if (user.name.toLocaleLowerCase() === "poulet") {
+          alert("On t'a reconnu Abdou !");
+        }
         DOMReference.dialogueContainer.classList.toggle("hidden");
       }
     }
@@ -601,4 +760,8 @@ DOMReference.dropdownBtn.addEventListener("click", () => {
   DOMReference.dropdownMenu.classList.toggle("visible");
   DOMReference.dropdownBtn.classList.toggle("bx-x");
   DOMReference.dropdownBtn.classList.toggle("bx-menu");
+});
+
+DOMReference.exitButton.addEventListener("click", () => {
+  window.location.href = "../index.html";
 });
