@@ -55,12 +55,18 @@ body {
   color: #ddd;
 }
 
-.heroSection {
-  background-image: url(../img/smoke.png);
-  padding: 300px;
+.smoke {
   opacity: 0.2;
+  /* position: relative; */
   
 }
+
+.div__hero {
+  display: flex;
+  justify-content: center;
+  z-index: 1;
+}
+  
 
 
 
