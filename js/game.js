@@ -46,6 +46,8 @@ const DOMReference = (() => {
   const closeButton = document.querySelector("#closeButton");
   const dropdownBtn = document.querySelector(".dropdown-btn");
   const dropdownMenu = document.querySelector(".dropdown-menu-content");
+  const endGameOverlay = document.querySelector("#endGameOverlay");
+  const endGameText = document.querySelector("#endGameText");
 
   return {
     body,
@@ -57,6 +59,8 @@ const DOMReference = (() => {
     closeButton,
     dropdownBtn,
     dropdownMenu,
+    endGameOverlay,
+    endGameText,
   };
 })();
 
@@ -70,9 +74,15 @@ const gameUtilities = (() => {
 
   const toLowerCase = (str) => str.toLowerCase();
 
+  const showEndGameOverlay = (message) => {
+    DOMReference.endGameText.innerHTML = message;
+    DOMReference.endGameOverlay.classList.remove("hidden");
+};
+
   return {
     sendDialog,
     toLowerCase,
+    showEndGameOverlay,
   };
 })();
 
@@ -168,6 +178,9 @@ const gameActions = {
         user.name,
         "A-larme désactivééé ♪! Cassons cette vitre telle un grand méchant et filon en douce !"
       );
+      setTimeout(() => {
+        gameUtilities.showEndGameOverlay("Félicitations ! Vous avez terminé le jeu.");
+    }, 3000); // Délai pour afficher le message de fin de jeu après la bulle de dialogue
     } else if (!user.hammer && gameItem.alarm) {
       gameUtilities.sendDialog(
         user.name,
@@ -526,7 +539,7 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener('DOMContentLoaded', () => {
   const bubble1 = document.getElementById("bubble1");
   const bubble2 = document.getElementById("bubble2");
-  const arrow = document.getElementById("flechedial"); // Utilisez l'ID correct
+  const arrow = document.getElementById("flechedial"); 
 
   let currentBubble = 1;
 
@@ -557,7 +570,7 @@ document.addEventListener('DOMContentLoaded', () => {
       {speaker: "Joueur 1", text: "Hors de question !.... Le musée ! Je vais leur.....euh Jessy, on se retrouve ce soir !"},
       {speaker: "PNJ", text: "Mais qu'est ce que tu *...."},
       {speaker: "Joueur 1", text: "Allé.. c'est dimanche apres midi, il y auras personne, c'est le meilleur moment pour aller leurs emprunter un costume super classe !"}
-  ];
+  ]});
 
   let currentDialogueIndex = 0;
   const bubble1 = document.getElementById("bubble1");
@@ -567,6 +580,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const speaker2 = document.getElementById("speaker2");
   const text2 = document.getElementById("text2");
   const arrow = document.getElementById("flechedial");
+  const overlay = document.getElementById("overlay");
+  // const vibreur = document.getElementById("vibreur");
 
   const updateDialogue = () => {
       const dialogue = dialogues[currentDialogueIndex];
@@ -582,18 +597,20 @@ document.addEventListener('DOMContentLoaded', () => {
           text2.textContent = dialogue.text;
       }
   };
+  // vibreur.play();
+  //           vibreur.addEventListener('ended', () => {
+  //               arrow.addEventListener('click', () => {
+  //                   currentDialogueIndex++;
+  //                   if (currentDialogueIndex >= dialogues.length) {
+  //                       overlay.style.display = "none"; // Cache l'overlay une fois tous les dialogues affichés
+  //                   } else {
+  //                       updateDialogue();
+  //                   }
+  //               });
 
-  arrow.addEventListener('click', () => {
-    currentDialogueIndex++;
-    if (currentDialogueIndex >= dialogues.length) {
-        overlay.style.display = "none"; // Cache l'overlay une fois tous les dialogues affichés
-    } else {
-        updateDialogue();
-    }
-});
-
-updateDialogue();
-});
+  //               updateDialogue();
+  //           });
+  //       });
 
 
 // START Menu Burger

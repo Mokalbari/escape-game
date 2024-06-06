@@ -12,12 +12,12 @@
       rel="stylesheet"
     />
     <script src="../js/game.js" defer></script>
-
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Image avec Zones Cliquables et Couleur</title>
   </head>
   <body>
+    <!-- <audio id="vibreur" src="../son/sonvibreur.mp3"></audio> -->
     <div id="overlay">
       <div id="contenerDialogueBox">
           <div class="dialogue-box" id="bubble1">
@@ -115,6 +115,11 @@
         </menu>
       </nav>
     </section>
+    <div id="endGameOverlay" class="hidden">
+      <div class="endGameMessage">
+          <p id="endGameText">Félicitations ! Vous avez terminé le jeu.</p>
+      </div>
+  </div>
 
     <script src="game.js"></script>
   </body>
