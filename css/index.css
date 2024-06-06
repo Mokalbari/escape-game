@@ -4,6 +4,7 @@ body {
   margin: 0;
   font-family: Arial, sans-serif;
   background-color: #12181F;
+
 }
 .flex {
   display: flex;
@@ -52,8 +53,27 @@ body {
 .nav-links a:hover {
   color: #ddd;
 }
-smoke {
-  background-image: image();
+.smoke {
+  z-index: index 1;;
+  opacity: 0.2;}
+.header {
+    position: relative;
+    height: 40vh;
+  z-index: 1;
+}
+    .header__logo {
+      object-fit: contain;
+    }
+    .header__logo,
+    .header__background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .header__background {
+      opacity: 0.2;
 }
 /* .header {
   width: 100%;
