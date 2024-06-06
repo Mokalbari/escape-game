@@ -163,6 +163,7 @@ document.addEventListener("DOMContentLoaded", () => {
             bubble1.style.display = "none";
             bubble2.style.display = "none";
             arrow.style.display = "none";
+            overlay.style.display = "none";
             // Par exemple, vous pourriez afficher un message de fin ou déclencher une autre action.
         }
     });
