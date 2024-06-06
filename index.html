@@ -15,10 +15,10 @@
     <script src="./js/script.js" defer></script>
   </head>
   <body>
-    <header>
-      <nav>
-        <div class="logo">Hero'Scape</div>
-        <menu>
+    <header class="container">
+      <nav class="navigation flex-row">
+        <div class="logo">Hero'<span class="logo--acent">Scape</span></div>
+        <menu class="navigation__menu flex-row">
           <li><a href="#">Home</a></li>
           <li><a href="#">About</a></li>
           <li><a href="#">Games</a></li>
@@ -28,19 +28,34 @@
     </header>
 
     <main>
-      <div class="container">
-        <div class="hero__content">
-          <h1>Bienvenue sur Hero'Scape</h1>
-          <p>
-            votre nouvelle destination pour des jeux captivants sur les
-            super-héros.Plongez dans un univers où vous incarnez des héros
-            légendaires, relevez des défis épiques et découvrez des aventures
-            inédites.Préparez-vous à vivre l'expérience ultime des super-héros,
+      <div class="container flex-row hero">
+        <div class="hero__container flex-column">
+          <h1 class="hero__title">Bienvenue sur Hero'Scape</h1>
+          <img
+            src="./img/Line 8.png"
+            alt="Ligne séparatrice"
+            class="hero__separator"
+          />
+          <p class="hero__content">
+            Votre nouvelle destination pour des jeux captivants sur les
+            super-héros.
+          </p>
+          <p class="hero__content">
+            Plongez dans un univers où vous incarnez des héros légendaires,
+            relevez des défis épiques et découvrez des aventures inédites.
+          </p>
+          <p class="hero__content">
+            Préparez-vous à vivre l'expérience ultime des super-héros,
             exclusivement sur Hero'scape!
           </p>
-          <a href="#">Commencez l'Aventure !</a>
+
+          <a href="#" class="cta">Commencez l'Aventure !</a>
         </div>
-        <img src="./img/hero_main_img.png" alt="A super hero from hero'scape" />
+        <img
+          src="./img/hero_main_img.png"
+          alt="A super hero from hero'scape"
+          class="hero__image"
+        />
       </div>
     </main>
   </body>
