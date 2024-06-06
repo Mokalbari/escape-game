@@ -10,6 +10,7 @@
 
   --size-53px: 3.3125rem;
   --size-31px: 1.9375rem;
+  --size-36px: 2.25rem;
   --size-25px: 1.5625rem;
 }
 
@@ -21,8 +22,8 @@ body {
 }
 
 .container {
-  width: 80%;
-  max-width: 1400px;
+  width: 90%;
+  max-width: 1500px;
   margin: 0 auto;
 }
 
@@ -35,17 +36,21 @@ body {
   flex-direction: column;
 }
 
+.uppercase {
+  text-transform: uppercase;
+}
+
 .cta {
   color: var(--clr-neutral-900);
   background-color: var(--clr-neutral-050);
   text-decoration: none;
-  padding: 0.5em 1em;
-  align-self: center;
+  padding: 0.5em 2em;
+  align-self: flex-start;
   border-radius: 0.75rem;
 }
 
 .logo {
-  font-size: var(--size-31px);
+  font-size: var(--size-36px);
   color: var(--clr-accent-1);
 
   .logo--acent {
@@ -68,24 +73,90 @@ body {
 }
 
 .hero {
+  position: relative; /* Assure que les éléments enfants sont positionnés relativement à cette section */
+  padding: 2rem;
   align-items: center;
   gap: 1rem;
 
-  .hero__title {
-    font-size: var(--size-53px);
-    margin-bottom: 0.5em;
+  /* Styliser le pseudo-élément pour créer l'arrière-plan avec opacité */
+  &::before {
+    content: ""; /* Obligatoire pour les pseudo-éléments */
+    position: absolute; /* Position absolue par rapport à la section .hero */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("../img/smoke1.png");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.1;
+    z-index: -1;
+    animation: moveBackground 25s linear infinite;
   }
 
-  .hero__separator {
-    margin-bottom: 2rem;
+  &::after {
+    content: ""; /* Obligatoire pour les pseudo-éléments */
+    position: absolute; /* Position absolue par rapport à la section .hero */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("../img/smoke2.png");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.5;
+    z-index: -1;
+    animation: fadeInOut 25s linear infinite; /* Animation with a duration of 10 seconds, ease-in-out easing, and infinite loop */
   }
+}
 
-  .hero__content {
-    max-width: 75%;
-    margin-bottom: 1em;
+.hero__container {
+  position: relative;
+  z-index: 1;
+}
+
+.hero__title {
+  font-size: var(--size-53px);
+  margin-bottom: 0.5em;
+}
+
+.hero__separator {
+  margin-bottom: 2rem;
+}
+
+.hero__content {
+  max-width: 75%;
+  margin-bottom: 1em;
+}
+
+.hero__image {
+  align-self: flex-start;
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes moveBackground {
+  0% {
+    transform: translateX(0);
   }
+  50% {
+    transform: translateX(100px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
 
-  .hero__image {
-    align-self: flex-start;
+@keyframes fadeInOut {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(100px);
+  }
+  100% {
+    transform: translateY(0);
   }
 }
