@@ -2,7 +2,7 @@
 // Fonctions fabrique pour créer des objets User et GameItem
 const user = {
   name: "&nbsp;",
-  enigme: "6",
+  enigme: "",
   key: false,
   code: "",
   codeChoice: "",
@@ -17,8 +17,8 @@ const user = {
 const gameItem = {
   enigme: 6,
   code: 2337,
-  alarm: false,
-  glass: false,
+  alarm: true,
+  glass: true,
 
   deactivateAlarm(inputCode) {
     if (inputCode === this.code) {
