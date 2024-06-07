@@ -1,18 +1,14 @@
 :root {
   /* Colors */
-  --clr-accent-1: #f7434c;
+  --clr-accent-1: #ff0000;
+  --clr-accent-3: #00afff;
   --clr-accent-2: #ffdb34;
-  --clr-accent-3: #00c4dc;
 
   --clr-neutral-950: #030712;
   --clr-neutral-800: #1f2937;
   --clr-neutral-500: #6b7280;
   --clr-neutral-05: #f9fafb;
 
-  --font-family-header1: "Bangers", system-ui;
-  --font-family-header2: "Acme", sans-serif;
-  --font-family-header3: "Walter Turncoat", cursive;
-
-  --font-family-body: system-ui, "Segoe UI", Roboto, Helvetica, Arial,
-    sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --font-family-title: "IM Fell French Canon SC", serif;
+  --font-family-body: "IM Fell French Canon", serif;
 }

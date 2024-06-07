@@ -9,16 +9,16 @@ const user = {
   card: false,
   hammer: false,
   inventory: [],
-  clean: false,
-  dress: false,
-  jacket: false,
+  clean: true,
+  dress: true,
+  jacket: true,
 };
 // Fonction fabrique pour créer les éléments du jeu.
 const gameItem = {
   enigme: 6,
   code: 2337,
-  alarm: true,
-  glass: true,
+  alarm: false,
+  glass: false,
 
   deactivateAlarm(inputCode) {
     if (inputCode === this.code) {

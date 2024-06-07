@@ -11,6 +11,16 @@
       href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
       rel="stylesheet"
     />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IM+Fell+French+Canon+SC&family=IM+Fell+French+Canon:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
     <script src="../js/game2.js" defer></script>
     <script src="../js/game.js" defer></script>
     <meta charset="UTF-8" />
@@ -23,7 +33,7 @@
       <div id="contenerDialogueBox">
         <!-- Bulle de dialogue pour Joueur 1 -->
         <div class="dialogue-box" id="bubble1">
-          <p id="speaker1">Joueur 1</p>
+          <p id="speaker1">"&nbsp;"</p>
           <p class="dialogue-text" id="text1">Allô Jessy ?</p>
         </div>
         <!-- Bulle de dialogue pour PNJ -->
@@ -45,10 +55,12 @@
     <div id="newOverlay" style="display: none">
       <div id="contenerDialogueBoxEnd" style="height: 100%">
         <div class="dialogue-box-end">
-          <p id="speakerNew">Joueur 1</p>
+          <p id="speakerNew" class="logo">
+            Hero'<span class="logo--acent">Scape</span>
+          </p>
           <p class="dialogue-text" id="textNew">
-            Bravo ! Tu as enfin ton costume pour ta soirée de super héro, FONCE
-            !
+            Bravo ! Tu as enfin ton costume pour ta soirée de super héros,
+            <em>FONCE</em> !
           </p>
           <a href="../index.html" class="cta">Revenir à l'accueil</a>
         </div>

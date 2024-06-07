@@ -112,39 +112,39 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Discution d'introduction
   const dialogues = [
-    { speaker: "Joueur 1", text: "Allô, Jessy ?" },
+    { speaker: `Joueur`, text: "Allô, Jessy ?" },
     {
       speaker: "Jessy",
       text: "Ouai, ça va ? Pas trop fatigué de ta nuit courte ?",
     },
     {
-      speaker: "Joueur 1",
+      speaker: "Joueur",
       text: "J'avoue, j'ai vécu pire. Je voulais ranger un peu chez moi mais j'ai pas pu prendre le temps. Je vais le faire aujourd'hui du coup.",
     },
     { speaker: "Jessy", text: "Aucune chance mon pote." },
-    { speaker: "Joueur 1", text: "Qu'est-ce qu'il se passe ?" },
+    { speaker: "Joueur", text: "Qu'est-ce qu'il se passe ?" },
     {
       speaker: "Jessy",
       text: "Ce soir y a une soirée costumée, et devine qui y sera ?",
     },
-    { speaker: "Joueur 1", text: "Ludivine ?" },
+    { speaker: "Joueur", text: "Ludivine ?" },
     {
       speaker: "Jessy",
       text: "La seule, l'unique, la plus jolie de tout le campus ! Rien que ca ! J'ai déjà mon costume de Super Zero, tu sais le méchant dans l'..",
     },
-    { speaker: "Joueur 1", text: "J'AI PAS DE COSTUME !" },
+    { speaker: "Joueur", text: "J'AI PAS DE COSTUME !" },
     {
       speaker: "Jessy",
       text: "Bah trouve une solution ! Tu veux vraiment rater ça ?",
     },
     {
-      speaker: "Joueur 1",
+      speaker: "Joueur",
       text: "Hors de question ! ... Le musée ! Je vais leur... Euh Jessy, on se retrouve ce soir !",
     },
     { speaker: "Jessy", text: "Mais qu'est ce que tu *...." },
     {
-      speaker: "Joueur 1",
-      text: "Allé.. c'est dimanche après-midi, il n'y aura personne. C'est le meilleur moment pour aller leur 'emprunter' un costume super classe !",
+      speaker: "Joueur",
+      text: "Allé.. c'est dimanche après-midi, il n'y aura personne au musée des supers héros. C'est le meilleur moment pour aller leur 'emprunter' un costume super classe !",
     },
   ];
 
