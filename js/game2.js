@@ -112,39 +112,39 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Discution d'introduction
   const dialogues = [
-    { speaker: "Joueur 1", text: "Allô Jessy ?" },
+    { speaker: "Joueur 1", text: "Allô, Jessy ?" },
     {
-      speaker: "PNJ",
-      text: "Ouai ca va ? Pas trop fatiguer de ta nuit courte ?",
+      speaker: "Jessy",
+      text: "Ouai, ça va ? Pas trop fatigué de ta nuit courte ?",
     },
     {
       speaker: "Joueur 1",
-      text: "J'avoue que j'ai vécu pire, je voulais un peu ranger chez moi j'ai pas pu prendre le temps, je vais le faire aujourd'hui du coup",
+      text: "J'avoue, j'ai vécu pire. Je voulais ranger un peu chez moi mais j'ai pas pu prendre le temps. Je vais le faire aujourd'hui du coup.",
     },
-    { speaker: "PNJ", text: "Aucune chance mon pote" },
-    { speaker: "Joueur 1", text: "Qu'est ce qui se passe ?" },
+    { speaker: "Jessy", text: "Aucune chance mon pote." },
+    { speaker: "Joueur 1", text: "Qu'est-ce qu'il se passe ?" },
     {
-      speaker: "PNJ",
+      speaker: "Jessy",
       text: "Ce soir y a une soirée costumée, et devine qui y sera ?",
     },
     { speaker: "Joueur 1", text: "Ludivine ?" },
     {
-      speaker: "PNJ",
+      speaker: "Jessy",
       text: "La seule, l'unique, la plus jolie de tout le campus ! Rien que ca ! J'ai déjà mon costume de Super Zero, tu sais le méchant dans l'..",
     },
-    { speaker: "Joueur 1", text: "J AI PAS DE COSTUME" },
+    { speaker: "Joueur 1", text: "J'AI PAS DE COSTUME !" },
     {
-      speaker: "PNJ",
-      text: "Bah trouve une solution ! Tu veux vraiment rater ca ?",
+      speaker: "Jessy",
+      text: "Bah trouve une solution ! Tu veux vraiment rater ça ?",
     },
     {
       speaker: "Joueur 1",
-      text: "Hors de question !.... Le musée ! Je vais leur.....euh Jessy, on se retrouve ce soir !",
+      text: "Hors de question ! ... Le musée ! Je vais leur... Euh Jessy, on se retrouve ce soir !",
     },
-    { speaker: "PNJ", text: "Mais qu'est ce que tu *...." },
+    { speaker: "Jessy", text: "Mais qu'est ce que tu *...." },
     {
       speaker: "Joueur 1",
-      text: "Allé.. c'est dimanche apres midi, il y auras personne, c'est le meilleur moment pour aller leurs emprunter un costume super classe !",
+      text: "Allé.. c'est dimanche après-midi, il n'y aura personne. C'est le meilleur moment pour aller leur 'emprunter' un costume super classe !",
     },
   ];
 
