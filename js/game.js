@@ -2,16 +2,16 @@
 // Fonctions fabrique pour créer des objets User et GameItem
 const user = {
   name: "&nbsp;",
-  enigme: "",
-  key: false,
+  enigme: "6",
+  key: true,
   code: "",
   codeChoice: "",
   card: false,
-  hammer: false,
+  hammer: true,
   inventory: [],
-  clean: false,
-  dress: false,
-  jacket: false,
+  clean: true,
+  dress: true,
+  jacket: true,
 };
 // Fonction fabrique pour créer les éléments du jeu.
 const gameItem = {
@@ -115,6 +115,7 @@ const gameUtilities = (() => {
   };
 })();
 
+
 // Création d'objets pour encapsuler la logique du jeu
 // Stocker dans cet objet toutes les fonctions qui contiennent les scripts qui doivent être exécutés lorsqu'une zone est cliquée.
 const gameActions = {
@@ -211,6 +212,15 @@ const gameActions = {
         user.name,
         "Tra-vail terminééé ♪! Cassons cette vitre tel un grand méchant et filons en douce !"
       );
+     
+        // Afficher la boîte de dialogue initiale
+
+        document.getElementById("newOverlay").classList.add("overlay__end__visible");
+        // Afficher la boîte de dialogue après avoir cassé la vitre
+        document.getElementById("newOverlay").style.display = "block";
+        document.getElementById("newOverlay").classList.add("overlay__end__visible");
+  
+      
     } else if (!user.hammer && gameItem.alarm) {
       gameUtilities.sendDialog(
         user.name,
@@ -680,6 +690,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
+
 
 // START Menu Burger
 DOMReference.dropdownBtn.addEventListener("click", () => {
