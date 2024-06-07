@@ -1,58 +1,367 @@
-@import url("variables.css");
-.footer {
+:root {
+  --font-family-title: "IM Fell French Canon SC", serif;
+  --font-family-body: "IM Fell French Canon", serif;
+
+  --clr-neutral-900: #1e1e1e;
+  --clr-neutral-050: #f7f7f7;
+
+  --clr-accent-1: #ff0000;
+  --clr-accent-2: #00afff;
+
+  --size-53px: 3.3125rem;
+  --size-31px: 1.9375rem;
+  --size-36px: 2.25rem;
+  --size-25px: 1.5625rem;
+}
+
+/*  GENERAL STYLING */
+body {
+  background-color: var(--clr-neutral-900);
+  color: var(--clr-neutral-050);
+  font-family: var(--font-family-body);
+  font-size: var(--size-25px);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* CLASSES UTILITAIRES */
+
+.container {
+  width: 90%;
+  max-width: 1500px;
+  margin: 0 auto;
+
+  @media (max-width: 600px) {
+    & {
+      width: calc(100vw - 5px);
+    }
+  }
+}
+
+.flex-row {
   display: flex;
-  background-color: var(--clr-accent-2);
-  justify-content: center;
-  background-size: cover;
+}
+
+.flex-column {
+  display: flex;
   flex-direction: column;
-
-  .footer__container {
-    display: flex;
-    justify-content: space-between;
-    margin: 10px;
-    margin-right: 50px;
-    margin-left: 50px;
-    font-family: var(--font-family-header2);
-  }
-
-  .footer__mention {
-    display: flex;
-    justify-content: center;
-    font-family: var(--font-family-header1);
-    background-color: white;
-    color: var(--clr-accent-3);
-  }
-  .footer__link {
-    display: flex;
-  }
-  .footer__link > a {
-    color: var(--clr-accent-1);
-    text-decoration: none;
-  }
 }
-.legalMention {
-  color: var(--clr-accent-3);
+
+.cta {
+  color: var(--clr-neutral-900);
+  background-color: var(--clr-neutral-050);
   text-decoration: none;
+  padding: 0.5em 2em;
+  align-self: flex-start;
+  border-radius: 0.75rem;
+  z-index: 2;
+
+  -webkit-box-shadow: 0px 0px 18px 0px rgba(240, 82, 114, 0.6);
+  -moz-box-shadow: 0px 0px 18px 0px rgba(240, 82, 114, 0.6);
+  box-shadow: 0px 0px 18px 0px rgba(240, 82, 114, 0.6);
+  transition: box-shadow 0.3s ease-in-out transform 0.3s ease-in-out;
+
+  &:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+    -webkit-box-shadow: 0px 0px 30px 10px rgba(240, 82, 114, 0.8);
+    -moz-box-shadow: 0px 0px 30px 10px rgba(240, 82, 114, 0.8);
+    box-shadow: 0px 0px 30px 10px rgba(240, 82, 114, 0.8);
+  }
+
+  &:focus,
+  &:active {
+    background: lightcoral;
+    -webkit-box-shadow: 0px 0px 30px 10px rgba(240, 82, 114, 0.8);
+    -moz-box-shadow: 0px 0px 30px 10px rgba(240, 82, 114, 0.8);
+    box-shadow: 0px 0px 30px 10px rgba(240, 82, 114, 0.8);
+  }
 }
-.btn {
+
+.link {
+  color: inherit;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.logo {
+  font-family: var(--font-family-title);
+  font-size: var(--size-36px);
   color: var(--clr-accent-1);
-  text-decoration: none;
-}
-.twitter {
-  img {
-    width: 15px;
-    margin-right: 10px;
+
+  .logo--acent {
+    color: var(--clr-accent-2);
   }
 }
-.instagram {
-  img {
-    width: 17px;
-    margin-right: 10px;
+
+/* SYLE SUR LES SECTIONS */
+/* NAVIGATION */
+
+header {
+  top: 0;
+  z-index: 2;
+}
+
+.navigation {
+  font-family: var(--font-family-title);
+
+  .navigation__menu {
+    gap: 2rem;
+    margin-left: auto;
+
+    a {
+      text-decoration: none;
+    }
+  }
+  margin-block: 5vh;
+
+  @media (max-width: 1000px) {
+    & {
+      flex-flow: column wrap;
+      align-items: center;
+      justify-content: center;
+
+      .navigation__menu {
+        margin-left: 0;
+        flex-wrap: wrap;
+        gap: 1rem;
+        font-size: 1.5rem;
+      }
+    }
   }
 }
-.youtube {
-  img {
-    width: 23px;
-    margin-right: 10px;
+
+/* HERO */
+.hero {
+  position: relative; /* Assure que les éléments enfants sont positionnés relativement à cette section */
+  align-items: center;
+  gap: 1rem;
+
+  /* Styliser le pseudo-élément pour créer l'arrière-plan avec opacité */
+  &::before {
+    content: ""; /* Obligatoire pour les pseudo-éléments */
+    position: absolute; /* Position absolue par rapport à la section .hero */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("../img/smoke1.png");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.1;
+    z-index: -1;
+    animation: moveBackground 25s linear infinite;
+  }
+
+  &::after {
+    content: ""; /* Obligatoire pour les pseudo-éléments */
+    position: absolute; /* Position absolue par rapport à la section .hero */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("../img/smoke2.png");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.5;
+    z-index: -1;
+    animation: fadeInOut 25s linear infinite; /* Animation with a duration of 10 seconds, ease-in-out easing, and infinite loop */
+  }
+  .hero__container {
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero__title {
+    font-size: clamp(2.5rem, 2.037rem + 2.3148vw, 3.3125rem);
+    margin-bottom: 0.5em;
+  }
+
+  .hero__separator {
+    margin-bottom: 2rem;
+    max-width: 75%;
+  }
+
+  .hero__content {
+    max-width: 75%;
+    margin-bottom: 1em;
+    font-family: var(--font-family-body);
+  }
+
+  .hero__image {
+    align-self: flex-start;
+    min-width: 50%;
+    position: relative;
+    z-index: -2;
+  }
+  margin-block: 25vh;
+
+  @media (max-width: 600px) {
+    & {
+      margin-block: 10vh;
+    }
+  }
+
+  @media (max-width: 900px) {
+    & {
+      flex-flow: column-reverse;
+
+      .hero__image {
+        min-width: 40%;
+      }
+
+      .hero__container {
+        margin-block: 10vh;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+      }
+
+      .hero__content {
+        max-width: 90%;
+        font-size: 1.5rem;
+      }
+
+      .cta {
+        align-self: center;
+        margin-inline: 20px;
+      }
+    }
+  }
+}
+
+/* GAMES */
+.games {
+  display: grid;
+
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-bottom: 15vh;
+
+  .games__container {
+    margin-block: 6.25rem;
+    display: grid;
+    grid-template-rows: auto auto;
+    grid-template-areas:
+      "avatar"
+      "content";
+  }
+
+  .games__game {
+    padding: 1rem;
+    align-items: center;
+    background-color: var(--clr-neutral-050);
+    color: var(--clr-neutral-900);
+    border-radius: 1rem;
+    grid-area: content;
+
+    -webkit-box-shadow: 0px 0px 18px 0px rgba(240, 82, 114, 0.6);
+    -moz-box-shadow: 0px 0px 18px 0px rgba(240, 82, 114, 0.6);
+    box-shadow: 0px 0px 18px 0px rgba(240, 82, 114, 0.6);
+    transition: transform 200ms ease-in-out;
+
+    &:hover,
+    &:focus {
+      transform: translateY(-10px);
+    }
+  }
+
+  .games__avatar {
+    grid-area: avatar;
+    justify-self: center;
+    align-self: center;
+    margin-top: -150px;
+    margin-bottom: 1rem;
+  }
+
+  .games__title {
+    font-family: var(--font-family-title);
+    font-size: clamp(2.5rem, 2.037rem + 2.3148vw, 3.3125rem);
+    margin-block: 1em;
+  }
+
+  .games__image {
+    border-radius: 0.5rem;
+    margin-block: 2rem;
+    max-width: 95%;
+  }
+
+  .games__content {
+    width: 85%;
+    margin: 0 auto;
+    margin-bottom: 1em;
+  }
+
+  .games__button {
+    transform: scale(1.5);
+    align-self: center;
+    margin-block: 2rem;
+    color: var(--clr-accent-1);
+    opacity: 0.5;
+    transition: opacity 200ms ease-in-out;
+
+    &:hover,
+    &:focus {
+      transition: opacity 200ms ease-in-out;
+      opacity: 1;
+    }
+  }
+
+  @media (max-width: 600px) {
+    & {
+      .games__container {
+        margin-block: 5rem;
+      }
+
+      .games__game {
+        width: 95%;
+        margin: 0 auto;
+      }
+    }
+  }
+}
+
+.footer {
+  font-size: 1rem;
+  opacity: 0.7;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-family: var(--font-family-body);
+  margin-bottom: 2rem;
+
+  span {
+    color: var(--clr-accent-1);
+  }
+}
+
+/* ANIMATIONS */
+@keyframes moveBackground {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(100px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInOut {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(100px);
+  }
+  100% {
+    transform: translateY(0);
   }
 }

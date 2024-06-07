@@ -6,12 +6,247 @@ body {
   background-color: var(--clr-neutral-800);
 }
 
+#overlay {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  justify-content: end;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  z-index: 2;
+}
+
+#contenerDialogueBox {
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+#contenerDialogueBoxEnd {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  margin-bottom: 20px;
+  height: 100%;
+}
+
+.dialogue-box {
+  background-color: gainsboro;
+  padding: 20px;
+  border-radius: 15px;
+  max-width: 65%;
+  margin: 10px;
+  display: none;
+}
+
+.dialogue-box-end {
+  display: block;
+  background-color: gainsboro;
+  padding: 1.25rem;
+  border-radius: 15px;
+  max-width: 65%;
+  margin: 10px;
+}
+
+.logo {
+  font-family: var(--font-family-title);
+  color: var(--clr-accent-1);
+  font-size: 36px;
+
+  .logo--acent {
+    color: var(--clr-accent-3);
+  }
+}
+
+#bubble1 {
+  display: block;
+  text-align: center;
+  font-size: 1.3rem;
+  background-color: lightgreen;
+  animation: popup 3s linear;
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    "Open Sans",
+    "Helvetica Neue",
+    sans-serif;
+
+  #speaker1 {
+    font-family:
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      Roboto,
+      Oxygen,
+      Ubuntu,
+      Cantarell,
+      "Open Sans",
+      "Helvetica Neue",
+      sans-serif;
+    font-weight: 600;
+    font-size: 1.5rem;
+    margin-bottom: 0.5em;
+  }
+}
+
+#bubble2 {
+  display: block;
+  text-align: center;
+  font-size: 1.3rem;
+  background-color: lightblue;
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    "Open Sans",
+    "Helvetica Neue",
+    sans-serif;
+
+  #speaker2 {
+    font-family:
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      Roboto,
+      Oxygen,
+      Ubuntu,
+      Cantarell,
+      "Open Sans",
+      "Helvetica Neue",
+      sans-serif;
+    font-weight: 600;
+    font-size: 1.5rem;
+    margin-bottom: 0.5em;
+  }
+}
+
+.dialogue-box-end {
+  text-align: center;
+  color: white;
+  padding: 2rem;
+  background: #b92b27; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #1565c0,
+    #b92b27
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #1565c0,
+    #b92b27
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  &::before {
+    content: ""; /* Obligatoire pour les pseudo-éléments */
+    position: absolute; /* Position absolue par rapport à la section .hero */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("../img/smoke1.png");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.1;
+    z-index: -1;
+    animation: moveBackground 25s linear infinite;
+  }
+
+  &::after {
+    content: ""; /* Obligatoire pour les pseudo-éléments */
+    position: absolute; /* Position absolue par rapport à la section .hero */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("../img/smoke2.png");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.5;
+    z-index: -1;
+    animation: fadeInOut 25s linear infinite; /* Animation with a duration of 10 seconds, ease-in-out easing, and infinite loop */
+  }
+
+  .dialogue-text {
+    font-size: 1.3rem;
+    margin-bottom: 3rem;
+  }
+
+  a {
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    padding: 1rem;
+    font-family: var(--font-family-title);
+    color: inherit;
+  }
+}
+
+#contenerFlecheBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 75px;
+}
+
+.fleche-box {
+  background-color: gainsboro;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+  width: 75px;
+  height: 75px;
+  cursor: pointer;
+}
+
+#newOverlay {
+  position: fixed;
+  display: none;
+  width: 100%;
+  height: 100%;
+  background-color: var(--clr-neutral-800);
+  z-index: 2;
+}
+
+.overlay__end__visible {
+  display: block;
+}
+
+.hidden {
+  display: none;
+}
+
+.endGameMessage {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+
 .image__container {
   position: relative;
   width: min(1080px 100%); /* This keeps the same width as the image */
 }
 
 #playing-image {
+  max-height: 100vh;
   width: 100%; /* Full width within its container */
   border-radius: 1rem;
 }
@@ -47,6 +282,63 @@ body {
   }
 }
 
+#dialogue__inventory {
+  background-color: white;
+  width: 35ch;
+  height: 10ch;
+  display: grid;
+  place-items: center;
+  border-radius: 2rem;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 17px 19px 15px -3px rgba(0, 0, 0, 0.8);
+
+  #inventoryContent {
+    color: rgb(73, 161, 73);
+    font-size: large;
+    font-weight: 600;
+
+    &::before {
+      content: "+ ";
+    }
+  }
+}
+
+.animate {
+  animation: slideAndScale 3s forwards;
+}
+
+@keyframes slideAndScale {
+  0% {
+    transform: translate(0, 0) scale(0.5);
+    opacity: 0.5;
+  }
+  10% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  70% {
+    transform: translate(0, 0) scale(0.5);
+    opacity: 0.5;
+  }
+  80% {
+    transform: translate(25vw, -50vh) scale(0);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(25vw, -50vh) scale(0);
+    opacity: 0;
+  }
+}
+
 .hidden {
   opacity: 0;
   display: none;
@@ -58,6 +350,7 @@ body {
   top: 0;
   right: 0;
   position: absolute;
+  min-width: 40ch;
 
   li {
     text-decoration: none;
@@ -79,6 +372,7 @@ body {
   background-color: var(--clr-neutral-05);
   text-align: center;
   min-width: 8rem;
+  border-radius: 2rem;
 
   li {
     margin-bottom: 10px;
@@ -98,6 +392,21 @@ body {
   transition:
     transform 250ms ease-in-out,
     opacity 250ms ease-in-out;
+
+  .dropdown-inventory {
+    font-weight: 600;
+    margin-block: 1rem;
+
+    &::before {
+      content: "« ";
+      color: var(--clr-accent-1);
+    }
+
+    &::after {
+      content: " »";
+      color: var(--clr-accent-1);
+    }
+  }
 }
 
 .visible {
@@ -110,3 +419,26 @@ body {
 }
 
 /** END Menu Burger **/
+@keyframes moveBackground {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(100px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInOut {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(100px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
