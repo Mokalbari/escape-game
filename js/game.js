@@ -17,8 +17,8 @@ const user = {
 const gameItem = {
   enigme: 6,
   code: 2337,
-  alarm: true,
-  glass: true,
+  alarm: false,
+  glass: false,
 
   deactivateAlarm(inputCode) {
     if (inputCode === this.code) {
